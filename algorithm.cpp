@@ -17,13 +17,7 @@ Algorithm::Algorithm(sf::RenderWindow &window) : m_RenderWindow(window)
 	}
 
 	// Initialize array
-	for (int y = 0; y < m_Array.size(); ++y)
-	{
-		for (int x = 0; x < m_Array.size(); ++x)
-		{
-			m_Array[y][x] = NULL;
-		}
-	}
+	resetArray();
 }
 
 void Algorithm::draw()
@@ -70,7 +64,7 @@ void Algorithm::draw()
 	}
 }
 
-void Algorithm::foldRandom()
+void Algorithm::resetArray()
 {
 	for (int y = 0; y < m_Array.size(); ++y)
 	{
@@ -79,11 +73,15 @@ void Algorithm::foldRandom()
 			m_Array[y][x] = NULL;
 		}
 	}
+}
+
+void Algorithm::foldRandom()
+{
+	resetArray();
 
 	bool possible = true;
 
 	sf::Vector2i currentCell(0, 0);
-	bool reachedEnd = false;
 	for (unsigned int i = 0; i < m_Elements.size(); ++i)
 	{
 		m_Array[currentCell.y][currentCell.x] = &m_Elements[i];
@@ -144,9 +142,7 @@ sf::Vector2i Algorithm::calculateNextCell(sf::Vector2i &currentCell, Direction *
 }
 
 bool Algorithm::isDirectionPossible(sf::Vector2i position) 
-{
-	// sf::Vector2i coordinates = element->getRenderer().getCoordinates();
-	
+{	
 	// X position out of bounds
 	if (!(position.x >= 0 && position.x < m_Array.size()))
 	{

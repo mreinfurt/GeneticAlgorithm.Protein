@@ -7,7 +7,6 @@ class Algorithm {
 	public:
 		Algorithm(sf::RenderWindow &renderWindow);
 
-		void start();
 		void draw();
 
 		void readProteinsFromString(std::string proteins);
@@ -22,13 +21,13 @@ class Algorithm {
 		std::vector<Element> m_Elements;
 		int m_Energy;
 
+		int calculateEnergy();
+
 		// Render
 		sf::RenderWindow &m_RenderWindow;
 
-		// 
-		int calculateEnergy();
-
 		// Helper functions
+		void resetArray();
 		bool isDirectionPossible(sf::Vector2i position);
 		sf::Vector2i calculateNextCell(sf::Vector2i &currentCell, Direction *direction);
 		bool Algorithm::isSequenceNeighbour(Element *lhs, Element *rhs);

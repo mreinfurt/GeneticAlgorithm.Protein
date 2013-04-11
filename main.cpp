@@ -14,9 +14,7 @@ std::string SEQ50 = "11010101011110100010001000010001000101111010101011";
  {
      sf::RenderWindow window(sf::VideoMode(800, 600), "Genetic algorithms");
 	 window.setVerticalSyncEnabled(true);
-	 Algorithm algorithm(window);
-	 
-	 algorithm.readProteinsFromString(SEQ50);
+	 Algorithm algorithm(window);	 
 	 algorithm.foldRandom();
 
      sf::Font font;
@@ -27,9 +25,9 @@ std::string SEQ50 = "11010101011110100010001000010001000101111010101011";
 	 energyText.append(std::to_string((algorithm.getEnergy())));
 
 	 sf::Text energy(energyText, font, 20);
-	 energy.setPosition(10, 10);
+	 energy.setPosition(10, 5);
 
-	 sf::Text instruction("Num 1(20), 2(25), 3(36), 4(50) - Space: New folding", font, 20);
+	 sf::Text instruction("Num 1(20), 2(25), 3(36), 4(50) - Any key: New folding", font, 20);
 	 instruction.setPosition(10, 560);
 
      while (window.isOpen())
@@ -44,34 +42,27 @@ std::string SEQ50 = "11010101011110100010001000010001000101111010101011";
 
 			 if (event.type == sf::Event::KeyPressed)
 			 {
-				if (event.key.code == sf::Keyboard::Space)
-				{
-					algorithm.foldRandom();
-				}
-
 				if (event.key.code == sf::Keyboard::Num1)
 				{
 					algorithm.readProteinsFromString(SEQ20);
-					algorithm.foldRandom();
 				}
 
 				if (event.key.code == sf::Keyboard::Num2)
 				{
 					algorithm.readProteinsFromString(SEQ25);
-					algorithm.foldRandom();
 				}
 
 				if (event.key.code == sf::Keyboard::Num3)
 				{
 					algorithm.readProteinsFromString(SEQ36);
-					algorithm.foldRandom();
 				}
 
 				if (event.key.code == sf::Keyboard::Num4)
 				{
 					algorithm.readProteinsFromString(SEQ50);
-					algorithm.foldRandom();
 				}
+								
+				algorithm.foldRandom();
 			 }
          }
 		 

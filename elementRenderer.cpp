@@ -5,7 +5,7 @@ int ElementRenderer::m_Size = 20;
 
 ElementRenderer::ElementRenderer(const Element const *element) : m_Element(element), m_Shape(sf::Vector2f(m_Size, m_Size))
 {
-	m_Shape.setOutlineColor(sf::Color::Black);
+	m_Shape.setOutlineColor(sf::Color(128, 128, 128, 255));
 	m_Shape.setOutlineThickness(1.0);
 
 	sf::Color fillColor = element->getHydrophile() ? sf::Color::White : sf::Color::Black;
