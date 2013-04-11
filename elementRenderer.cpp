@@ -10,6 +10,7 @@ ElementRenderer::ElementRenderer(const Element const *element) : m_Element(eleme
 
 	sf::Color fillColor = element->getHydrophile() ? sf::Color::White : sf::Color::Black;
 	m_Shape.setFillColor(fillColor);
+	m_Position = sf::Vector2i(0, 0);
 }
 	
 void ElementRenderer::update()

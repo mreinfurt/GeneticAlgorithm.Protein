@@ -18,7 +18,7 @@ class Algorithm {
 
 	private:
 		// Data
-		std::array<std::array<Element*, 10>, 10> m_Array;
+		std::array<std::array<Element*, 13>, 13> m_Array;
 		std::vector<Element> m_Elements;
 		int m_Energy;
 
@@ -29,7 +29,7 @@ class Algorithm {
 		int calculateEnergy();
 
 		// Helper functions
-		bool isDirectionPossible(sf::Vector2i position, Element *element);
+		bool isDirectionPossible(sf::Vector2i position);
 		sf::Vector2i calculateNextCell(sf::Vector2i &currentCell, Direction *direction);
 		bool Algorithm::isSequenceNeighbour(Element *lhs, Element *rhs);
 };

@@ -3,13 +3,20 @@
 #include <array>
 #include "algorithm.h"
 
+std::string SEQ20 = "10100110100101100101";
+std::string SEQ24 = "110010010010010010010011";
+std::string SEQ25 = "0010011000011000011000011";
+std::string SEQ36 = "000110011000001111111001100001100100";
+std::string SEQ48 = "001001100110000011111111110000001100110010011111";
+std::string SEQ50 = "11010101011110100010001000010001000101111010101011";
+
  int main()
  {
      sf::RenderWindow window(sf::VideoMode(800, 600), "Genetic algorithms");
 	 window.setVerticalSyncEnabled(true);
 	 Algorithm algorithm(window);
 	 
-	 algorithm.readProteinsFromString("10110010101100100");
+	 algorithm.readProteinsFromString(SEQ50);
 	 algorithm.foldRandom();
 
      sf::Font font;
@@ -22,7 +29,7 @@
 	 sf::Text energy(energyText, font, 20);
 	 energy.setPosition(10, 10);
 
-	 sf::Text instruction("Press space to generate new folding", font, 20);
+	 sf::Text instruction("Num 1(20), 2(25), 3(36), 4(50) - Space: New folding", font, 20);
 	 instruction.setPosition(10, 560);
 
      while (window.isOpen())
@@ -41,10 +48,39 @@
 				{
 					algorithm.foldRandom();
 				}
+
+				if (event.key.code == sf::Keyboard::Num1)
+				{
+					algorithm.readProteinsFromString(SEQ20);
+					algorithm.foldRandom();
+				}
+
+				if (event.key.code == sf::Keyboard::Num2)
+				{
+					algorithm.readProteinsFromString(SEQ25);
+					algorithm.foldRandom();
+				}
+
+				if (event.key.code == sf::Keyboard::Num3)
+				{
+					algorithm.readProteinsFromString(SEQ36);
+					algorithm.foldRandom();
+				}
+
+				if (event.key.code == sf::Keyboard::Num4)
+				{
+					algorithm.readProteinsFromString(SEQ50);
+					algorithm.foldRandom();
+				}
 			 }
          }
 		 
 		 window.clear(sf::Color(60, 60, 60, 255));
+		 			
+		 std::string energyText = "Energy: ";
+		 energyText.append(std::to_string((algorithm.getEnergy())));
+		 energy.setString(energyText);
+
 		 algorithm.draw();
 		 window.draw(energy);
 		 window.draw(instruction);

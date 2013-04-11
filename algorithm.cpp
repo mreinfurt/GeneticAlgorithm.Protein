@@ -72,7 +72,17 @@ void Algorithm::draw()
 
 void Algorithm::foldRandom()
 {
-	sf::Vector2i currentCell(5, 5);
+	for (int y = 0; y < m_Array.size(); ++y)
+	{
+		for (int x = 0; x < m_Array.size(); ++x)
+		{
+			m_Array[y][x] = NULL;
+		}
+	}
+
+	bool possible = true;
+
+	sf::Vector2i currentCell(0, 0);
 	bool reachedEnd = false;
 	for (unsigned int i = 0; i < m_Elements.size(); ++i)
 	{
@@ -80,10 +90,31 @@ void Algorithm::foldRandom()
 		m_Array[currentCell.y][currentCell.x]->getRenderer().setPosition(currentCell);
 
 		Direction direction = (Direction) (rand() % 4);
-		currentCell = calculateNextCell(currentCell, &direction);
+		sf::Vector2i nextCell = currentCell;
+		nextCell = calculateNextCell(currentCell, &direction);
+		
+		int counter = 0;
+
+		while (!isDirectionPossible(nextCell) && counter < 10)
+		{
+			direction = (Direction) (rand() % 4);
+			nextCell = calculateNextCell(currentCell, &direction);
+
+			counter++;
+		}
+
+		if (counter >= 10)
+		{
+			possible = false;
+			break;
+		}
+		possible = true;
+		currentCell = nextCell;
 
 		m_Elements[i].setDirection(direction);
 	}
+
+	if (!possible) foldRandom();
 
 	std::cout << this->calculateEnergy();
 }
@@ -109,20 +140,12 @@ sf::Vector2i Algorithm::calculateNextCell(sf::Vector2i &currentCell, Direction *
 			break;
 		}
 
-		if (isDirectionPossible(nextCell, m_Array[currentCell.y][currentCell.x]))
-		{
-			currentCell = nextCell;
-			return currentCell;
-		}
-
-		int randomDirection = 0 + (rand() % (int)(3 - 0 + 1));
-		*direction = (Direction)randomDirection;
-		calculateNextCell(currentCell, direction);
+		return nextCell;
 }
 
-bool Algorithm::isDirectionPossible(sf::Vector2i position, Element *element) 
+bool Algorithm::isDirectionPossible(sf::Vector2i position) 
 {
-	sf::Vector2i coordinates = element->getRenderer().getCoordinates();
+	// sf::Vector2i coordinates = element->getRenderer().getCoordinates();
 	
 	// X position out of bounds
 	if (!(position.x >= 0 && position.x < m_Array.size()))
