@@ -5,6 +5,7 @@
 Algorithm::Algorithm(sf::RenderWindow &window) : m_RenderWindow(window)
 {
 	srand (time(NULL));
+
 	// Fill random proteins
 	for (int i = 0; i <= 10; ++i)
 	{
@@ -139,4 +140,22 @@ bool Algorithm::isDirectionPossible(sf::Vector2i position, Element *element)
 
 	// No problems occured, direction is possible
 	return true;
+}
+
+void Algorithm::readProteinsFromString(std::string proteins)
+{
+	m_Elements.clear();
+	int ASCII_Offset = 48;
+
+	for (int i = 0; i < proteins.length(); ++i)
+	{
+		bool hydrophobe = (bool) (proteins.at(i) - ASCII_Offset);
+		Element element(!hydrophobe, i);
+		m_Elements.push_back(element);
+	}
+}
+
+int Algorithm::calculateEnergy()
+{
+	return 0;
 }

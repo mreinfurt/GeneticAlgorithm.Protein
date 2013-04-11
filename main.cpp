@@ -7,7 +7,10 @@
  {
      sf::RenderWindow window(sf::VideoMode(800, 600), "Genetic algorithms");
 	 Algorithm algorithm(window);
+	 
+	 algorithm.readProteinsFromString("1110001100100");
 	 algorithm.fillArrayRandom();
+
 
      while (window.isOpen())
      {
