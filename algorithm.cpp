@@ -6,6 +6,7 @@
 Algorithm::Algorithm(sf::RenderWindow &window) : m_RenderWindow(window)
 {
 	srand (time(NULL));
+	m_Energy = -1;
 
 	// Fill random proteins
 	for (int i = 0; i <= 10; ++i)
@@ -69,7 +70,7 @@ void Algorithm::draw()
 	}
 }
 
-void Algorithm::fillArrayRandom()
+void Algorithm::foldRandom()
 {
 	sf::Vector2i currentCell(5, 5);
 	bool reachedEnd = false;
@@ -124,13 +125,13 @@ bool Algorithm::isDirectionPossible(sf::Vector2i position, Element *element)
 	sf::Vector2i coordinates = element->getRenderer().getCoordinates();
 	
 	// X position out of bounds
-	if (!(position.x >= 0 && position.x <= m_Array.size()))
+	if (!(position.x >= 0 && position.x < m_Array.size()))
 	{
 		return false;
 	}
 
 	// Y position out of bounds
-	if (!(position.y >= 0 && position.y <= m_Array.size()))
+	if (!(position.y >= 0 && position.y < m_Array.size()))
 	{
 		return false;
 	}
@@ -160,7 +161,15 @@ void Algorithm::readProteinsFromString(std::string proteins)
 
 Element* Algorithm::getElement(int x, int y)
 {
-	return m_Array[y][x];
+	if ((x >= 0 && x < m_Array.size()) && 
+		(y >= 0 && y < m_Array.size()))
+	{
+		return m_Array[y][x];
+	}
+	else
+	{
+		return NULL;
+	}
 }
 
 int Algorithm::calculateEnergy()
@@ -215,7 +224,8 @@ int Algorithm::calculateEnergy()
 
 	// All neighours are counted twice
 	energy /= 2;
-	return energy;
+	m_Energy = energy;
+	return m_Energy;
 }
 
 bool Algorithm::isSequenceNeighbour(Element *lhs, Element *rhs)

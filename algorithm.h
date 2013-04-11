@@ -12,13 +12,15 @@ class Algorithm {
 
 		void readProteinsFromString(std::string proteins);
 		Element* getElement(int x, int y);
+		int getEnergy() { return m_Energy; }
 
-		void fillArrayRandom();
+		void foldRandom();
 
 	private:
 		// Data
 		std::array<std::array<Element*, 10>, 10> m_Array;
 		std::vector<Element> m_Elements;
+		int m_Energy;
 
 		// Render
 		sf::RenderWindow &m_RenderWindow;
