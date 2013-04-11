@@ -6,9 +6,10 @@
  int main()
  {
      sf::RenderWindow window(sf::VideoMode(800, 600), "Genetic algorithms");
+	 window.setVerticalSyncEnabled(true);
 	 Algorithm algorithm(window);
 	 
-	 algorithm.readProteinsFromString("1110001100100");
+	 algorithm.readProteinsFromString("10110010101100100");
 	 algorithm.fillArrayRandom();
 
 

@@ -1,6 +1,7 @@
 #include "algorithm.h"
 #include <time.h>
 #include <stdlib.h>
+#include <iostream>
 
 Algorithm::Algorithm(sf::RenderWindow &window) : m_RenderWindow(window)
 {
@@ -70,7 +71,7 @@ void Algorithm::draw()
 
 void Algorithm::fillArrayRandom()
 {
-	sf::Vector2i currentCell(0, 0);
+	sf::Vector2i currentCell(5, 5);
 	bool reachedEnd = false;
 	for (unsigned int i = 0; i < m_Elements.size(); ++i)
 	{
@@ -82,6 +83,8 @@ void Algorithm::fillArrayRandom()
 
 		m_Elements[i].setDirection(direction);
 	}
+
+	std::cout << this->calculateEnergy();
 }
 
 sf::Vector2i Algorithm::calculateNextCell(sf::Vector2i &currentCell, Direction *direction)
@@ -155,7 +158,67 @@ void Algorithm::readProteinsFromString(std::string proteins)
 	}
 }
 
+Element* Algorithm::getElement(int x, int y)
+{
+	return m_Array[y][x];
+}
+
 int Algorithm::calculateEnergy()
 {
-	return 0;
+	int energy = 0;
+
+	for (int i = 0; i < m_Elements.size(); ++i)
+	{
+		if (m_Elements[i].isHydrophobe())
+		{
+			sf::Vector2i coordinates = m_Elements[i].getRenderer().getCoordinates();
+			Element *element = &m_Elements[i];
+			Element *adjacentElement = NULL;
+
+			// Check right
+			if (adjacentElement = getElement(coordinates.x + 1, coordinates.y))
+			{
+				if (!isSequenceNeighbour(element, adjacentElement) && adjacentElement->isHydrophobe())
+				{
+					energy++;
+				}
+			}
+
+			// Check left
+			if (adjacentElement = getElement(coordinates.x - 1, coordinates.y))
+			{
+				if (!isSequenceNeighbour(element, adjacentElement) && adjacentElement->isHydrophobe())
+				{
+					energy++;
+				}
+			}
+
+			// Check bottom
+			if (adjacentElement = getElement(coordinates.x, coordinates.y + 1))
+			{
+				if (!isSequenceNeighbour(element, adjacentElement) && adjacentElement->isHydrophobe())
+				{
+					energy++;
+				}
+			}
+
+			// Check top
+			if (adjacentElement = getElement(coordinates.x, coordinates.y - 1))
+			{
+				if (!isSequenceNeighbour(element, adjacentElement) && adjacentElement->isHydrophobe())
+				{
+					energy++;
+				}
+			}
+		}
+	}
+
+	// All neighours are counted twice
+	energy /= 2;
+	return energy;
+}
+
+bool Algorithm::isSequenceNeighbour(Element *lhs, Element *rhs)
+{
+	return (lhs->getIndex() == rhs->getIndex() - 1 || lhs->getIndex() == rhs->getIndex() + 1);
 }

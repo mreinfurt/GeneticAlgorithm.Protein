@@ -11,6 +11,7 @@ class Algorithm {
 		void draw();
 
 		void readProteinsFromString(std::string proteins);
+		Element* getElement(int x, int y);
 
 		void fillArrayRandom();
 
@@ -28,4 +29,5 @@ class Algorithm {
 		// Helper functions
 		bool isDirectionPossible(sf::Vector2i position, Element *element);
 		sf::Vector2i calculateNextCell(sf::Vector2i &currentCell, Direction *direction);
+		bool Algorithm::isSequenceNeighbour(Element *lhs, Element *rhs);
 };
