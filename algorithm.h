@@ -1,11 +1,11 @@
 #include "element.h"
 #include "elementRenderer.h"
-
 #include <array>
 
 class Algorithm {
 	public:
 		Algorithm(sf::RenderWindow &renderWindow);
+
 		void start();
 		void draw();
 

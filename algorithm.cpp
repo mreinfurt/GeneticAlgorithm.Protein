@@ -5,13 +5,15 @@
 Algorithm::Algorithm(sf::RenderWindow &window) : m_RenderWindow(window)
 {
 	srand (time(NULL));
-	for (int i = 0; i <= 20; ++i)
+	// Fill random proteins
+	for (int i = 0; i <= 10; ++i)
 	{
 		bool hydrophile = rand() % 2;
 		Element element(hydrophile, i);
 		m_Elements.push_back(element);
 	}
 
+	// Initialize array
 	for (int y = 0; y < m_Array.size(); ++y)
 	{
 		for (int x = 0; x < m_Array.size(); ++x)
@@ -26,9 +28,9 @@ void Algorithm::draw()
 	int offset = ElementRenderer::m_Offset;
 	int size = ElementRenderer::m_Size;
 
-	sf::RectangleShape line(sf::Vector2f(size, 2));
-	line.setFillColor(sf::Color::White);
-	line.setPosition(20, offset + size / 2);
+	sf::RectangleShape connectionLine(sf::Vector2f(size, 2));
+	connectionLine.setFillColor(sf::Color::White);
+	connectionLine.setPosition(20, offset + size / 2);
 
 	for (unsigned int i = 0; i < m_Elements.size(); ++i)
 	{
@@ -38,26 +40,27 @@ void Algorithm::draw()
 		switch (direction)
 		{
 			case West:
-				line.setPosition(position.x - size, position.y + size / 2);
-				line.setSize(sf::Vector2f(size, 2));
+				connectionLine.setPosition(position.x - size, position.y + size / 2);
+				connectionLine.setSize(sf::Vector2f(size, 2));
 				break;
 			case East:
-				line.setPosition(position.x + size, position.y + size / 2);
-				line.setSize(sf::Vector2f(size, 2));
+				connectionLine.setPosition(position.x + size, position.y + size / 2);
+				connectionLine.setSize(sf::Vector2f(size, 2));
 				break;
 			case North:
-				line.setPosition(position.x + size / 2, position.y - size);
-				line.setSize(sf::Vector2f(2, size));
+				connectionLine.setPosition(position.x + size / 2, position.y - size);
+				connectionLine.setSize(sf::Vector2f(2, size));
 				break;
 			case South:
-				line.setPosition(position.x + size / 2, position.y + size);
-				line.setSize(sf::Vector2f(2, size));
+				connectionLine.setPosition(position.x + size / 2, position.y + size);
+				connectionLine.setSize(sf::Vector2f(2, size));
 				break;
 			default:
 				break;
 		}
 
-		if (i != m_Elements.size() - 1) m_RenderWindow.draw(line);
+		// Draw connection line, but exclude last element
+		if (i != m_Elements.size() - 1) m_RenderWindow.draw(connectionLine);
 				
 		m_Elements[i].getRenderer().update();
 		m_Elements[i].getRenderer().draw(m_RenderWindow);
@@ -116,20 +119,24 @@ bool Algorithm::isDirectionPossible(sf::Vector2i position, Element *element)
 {
 	sf::Vector2i coordinates = element->getRenderer().getCoordinates();
 	
+	// X position out of bounds
 	if (!(position.x >= 0 && position.x <= m_Array.size()))
 	{
 		return false;
 	}
 
+	// Y position out of bounds
 	if (!(position.y >= 0 && position.y <= m_Array.size()))
 	{
 		return false;
 	}
 
-	if (m_Array[position.y][position.x] == NULL)
+	// Cell is already occupied
+	if (m_Array[position.y][position.x] != NULL)
 	{
-		return true;
+		return false;
 	}
 
-	return false;
+	// No problems occured, direction is possible
+	return true;
 }

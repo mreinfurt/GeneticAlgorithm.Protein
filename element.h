@@ -12,8 +12,10 @@ class Element {
 		Element(bool hydrophile, int index);
 
 		bool getHydrophile() const { return m_Hydrophile; }
+
 		Direction getDirection() const { return m_Direction; }
 		void setDirection(Direction direction) { m_Direction = direction; }
+
 		ElementRenderer& getRenderer() { return m_Renderer; }
 
 	private:

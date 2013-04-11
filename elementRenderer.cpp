@@ -7,14 +7,9 @@ ElementRenderer::ElementRenderer(const Element const *element) : m_Element(eleme
 {
 	m_Shape.setOutlineColor(sf::Color::Black);
 	m_Shape.setOutlineThickness(1.0);
-	if (element->getHydrophile() == true)
-	{
-		m_Shape.setFillColor(sf::Color::Black);
-	}
-	else
-	{
-		m_Shape.setFillColor(sf::Color::White);
-	}
+
+	sf::Color fillColor = element->getHydrophile() ? sf::Color::White : sf::Color::Black;
+	m_Shape.setFillColor(fillColor);
 }
 	
 void ElementRenderer::update()
@@ -25,4 +20,17 @@ void ElementRenderer::update()
 void ElementRenderer::draw(sf::RenderWindow &renderWindow)
 {
 	renderWindow.draw(m_Shape);
+}
+
+sf::Vector2i ElementRenderer::getCoordinates() const
+{ 
+	sf::Vector2i coordinates(((m_Position.x / m_Offset) - 1), 
+							 ((m_Position.y / m_Offset) - 1));
+	return coordinates;
+}
+
+void ElementRenderer::setPosition(sf::Vector2i &position) 
+{ 
+	m_Position.x = m_Offset + (position.x * m_Offset);
+	m_Position.y = m_Offset + (position.y * m_Offset);
 }
