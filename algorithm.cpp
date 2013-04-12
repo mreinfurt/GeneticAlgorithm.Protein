@@ -81,7 +81,7 @@ void Algorithm::foldRandom()
 
 	bool possible = true;
 
-	sf::Vector2i currentCell(0, 0);
+	sf::Vector2i currentCell(7, 7);
 	for (unsigned int i = 0; i < m_Elements.size(); ++i)
 	{
 		m_Array[currentCell.y][currentCell.x] = &m_Elements[i];
@@ -106,9 +106,8 @@ void Algorithm::foldRandom()
 			possible = false;
 			break;
 		}
-		possible = true;
-		currentCell = nextCell;
 
+		currentCell = nextCell;
 		m_Elements[i].setDirection(direction);
 	}
 
@@ -165,7 +164,7 @@ bool Algorithm::isDirectionPossible(sf::Vector2i position)
 	return true;
 }
 
-void Algorithm::readProteinsFromString(std::string proteins)
+void Algorithm::readProteinsFromString(const std::string &proteins)
 {
 	m_Elements.clear();
 	int ASCII_Offset = 48;

@@ -9,7 +9,7 @@ class Algorithm {
 
 		void draw();
 
-		void readProteinsFromString(std::string proteins);
+		void readProteinsFromString(const std::string &proteins);
 		Element* getElement(int x, int y);
 		int getEnergy() { return m_Energy; }
 
