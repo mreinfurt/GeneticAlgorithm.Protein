@@ -22,7 +22,7 @@ class Algorithm {
 		int m_Energy;
 
 		int calculateEnergy();
-
+		int calculateEnergy(std::vector<Element> folding);
 		// Render
 		sf::RenderWindow &m_RenderWindow;
 

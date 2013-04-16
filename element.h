@@ -1,5 +1,6 @@
 #pragma once
 #include "elementRenderer.h"
+
 enum Direction {
 	North,
 	South,

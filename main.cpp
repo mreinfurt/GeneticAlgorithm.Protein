@@ -14,7 +14,7 @@ std::string SEQ50 = "11010101011110100010001000010001000101111010101011";
  {
      sf::RenderWindow window(sf::VideoMode(800, 600), "Genetic algorithms - Norman Ackermann, Manuel Reinfurt");
 	 window.setVerticalSyncEnabled(true);
-	 Algorithm algorithm(window);	 
+	 Algorithm algorithm(window);	
 	 algorithm.foldRandom();
 
      sf::Font font;
@@ -65,6 +65,11 @@ std::string SEQ50 = "11010101011110100010001000010001000101111010101011";
 				{
 					algorithm.readProteinsFromString(SEQ50);
 				}
+
+				if (event.key.code == sf::Keyboard::R)
+				{
+					bestFolding = 0;
+				}
 								
 				algorithm.foldRandom();
 				if (algorithm.getEnergy() > bestFolding)
@@ -78,17 +83,6 @@ std::string SEQ50 = "11010101011110100010001000010001000101111010101011";
          }
 		 
 		 window.clear(sf::Color(60, 60, 60, 255));
-		 
-		 
-
-		algorithm.foldRandom();
-		if (algorithm.getEnergy() > bestFolding)
-		{
-			bestFolding = algorithm.getEnergy();
-			std::string energyText = "Best Energy: ";
-			energyText.append(std::to_string((algorithm.getEnergy())));
-			bestEnergy.setString(energyText);
-		}
 
 		 std::string energyText = "Energy: ";
 		 energyText.append(std::to_string((algorithm.getEnergy())));

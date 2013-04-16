@@ -80,7 +80,6 @@ void Algorithm::foldRandom()
 	resetArray();
 
 	bool possible = true;
-
 	sf::Vector2i currentCell(7, 7);
 	for (unsigned int i = 0; i < m_Elements.size(); ++i)
 	{
@@ -112,7 +111,6 @@ void Algorithm::foldRandom()
 	}
 
 	if (!possible) foldRandom();
-
 	std::cout << this->calculateEnergy();
 }
 
@@ -190,8 +188,7 @@ Element* Algorithm::getElement(int x, int y)
 	}
 }
 
-int Algorithm::calculateEnergy()
-{
+int Algorithm::calculateEnergy(std::vector<Element> folding) {
 	int energy = 0;
 
 	for (int i = 0; i < m_Elements.size(); ++i)
@@ -202,6 +199,9 @@ int Algorithm::calculateEnergy()
 			Element *element = &m_Elements[i];
 			Element *adjacentElement = NULL;
 
+			// Check overlapping elements
+
+		
 			// Check right
 			if (adjacentElement = getElement(coordinates.x + 1, coordinates.y))
 			{
@@ -240,10 +240,15 @@ int Algorithm::calculateEnergy()
 		}
 	}
 
-	// All neighours are counted twice
+	// All neighbors are counted twice
 	energy /= 2;
 	m_Energy = energy;
-	return m_Energy;
+	return m_Energy;	
+}
+
+int Algorithm::calculateEnergy()
+{
+	return calculateEnergy();
 }
 
 bool Algorithm::isSequenceNeighbour(Element *lhs, Element *rhs)
