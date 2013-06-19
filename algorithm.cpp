@@ -1,38 +1,46 @@
 #include "algorithm.h"
 #include <time.h>
 #include <stdlib.h>
+#include <fstream>
 #include <iostream>
 
-Algorithm::Algorithm(sf::RenderWindow &window) : m_RenderWindow(window)
+Algorithm::Algorithm(sf::RenderWindow &window) : m_RenderWindow(window), m_DrawConformation(NULL), m_Energy(0), m_Population(NULL)
 {
-	srand (time(NULL));
-	m_Energy = -1;
+	srand(time(NULL));
+}
 
-	// Fill random proteins
-	for (int i = 0; i <= 10; ++i)
-	{
-		bool hydrophile = rand() % 2;
-		Element element(hydrophile, i);
-		m_Elements.push_back(element);
-	}
-
-	// Initialize array
-	resetArray();
+Algorithm::~Algorithm()
+{
+	delete m_DrawConformation;
 }
 
 void Algorithm::draw()
 {
-	int offset = ElementRenderer::m_Offset;
-	int size = ElementRenderer::m_Size;
+	int offset = Element::m_Offset;
+	int size = Element::m_Size;
+
+	sf::RectangleShape m_Shape(sf::Vector2f(size, size));
+	m_Shape.setOutlineColor(sf::Color(128, 128, 128, 255));
+	m_Shape.setOutlineThickness(1.0);
+
+	if (!m_DrawConformation) return;
+
+	std::vector<Element> elements = m_DrawConformation->getElements();
 
 	sf::RectangleShape connectionLine(sf::Vector2f(size, 2));
 	connectionLine.setFillColor(sf::Color::White);
 	connectionLine.setPosition(20, offset + size / 2);
 
-	for (unsigned int i = 0; i < m_Elements.size(); ++i)
+	ScreenDirection direction = ScreenDirection::East;
+
+	for (unsigned int i = 0; i < elements.size(); ++i)
 	{
-		Direction direction = m_Elements[i].getDirection();
-		sf::Vector2i position = m_Elements[i].getRenderer().getPosition();
+		// Map relative direction to screen direction
+		direction = calculateDirection(direction, elements[i].getDirection());
+		sf::Vector2i position = elements[i].getPosition();
+
+		sf::Color fillColor = elements[i].getHydrophile() ? sf::Color::White : sf::Color::Black;
+		m_Shape.setFillColor(fillColor);
 
 		switch (direction)
 		{
@@ -57,201 +65,90 @@ void Algorithm::draw()
 		}
 
 		// Draw connection line, but exclude last element
-		if (i != m_Elements.size() - 1) m_RenderWindow.draw(connectionLine);
-				
-		m_Elements[i].getRenderer().update();
-		m_Elements[i].getRenderer().draw(m_RenderWindow);
+		if (i != elements.size() - 1) m_RenderWindow.draw(connectionLine);
+
+		m_Shape.setPosition((sf::Vector2f) elements[i].getPosition());
+		m_RenderWindow.draw(m_Shape);
+		//elements[i].getRenderer().draw(m_RenderWindow);
 	}
 }
 
-void Algorithm::resetArray()
+
+void Algorithm::run(bool output)
 {
-	for (int y = 0; y < m_Array.size(); ++y)
+	float avgFitness = m_Population->evaluation();
+
+	// Run through all generations
+	while (m_Generation < m_MaxGeneration) 
 	{
-		for (int x = 0; x < m_Array.size(); ++x)
+		m_Generation++;
+		m_Population->selection();
+		m_Population->crossover();
+		m_Population->mutation();
+
+		avgFitness = m_Population->evaluation();
+		if (output) 
 		{
-			m_Array[y][x] = NULL;
-		}
-	}
-}
-
-void Algorithm::foldRandom()
-{
-	resetArray();
-
-	bool possible = true;
-	sf::Vector2i currentCell(7, 7);
-	for (unsigned int i = 0; i < m_Elements.size(); ++i)
-	{
-		m_Array[currentCell.y][currentCell.x] = &m_Elements[i];
-		m_Array[currentCell.y][currentCell.x]->getRenderer().setPosition(currentCell);
-
-		Direction direction = (Direction) (rand() % 4);
-		sf::Vector2i nextCell = currentCell;
-		nextCell = calculateNextCell(currentCell, &direction);
-		
-		int counter = 0;
-
-		while (!isDirectionPossible(nextCell) && counter < 10)
-		{
-			direction = (Direction) (rand() % 4);
-			nextCell = calculateNextCell(currentCell, &direction);
-
-			counter++;
+			m_Logfile << m_Generation << "\t" << avgFitness << "\t" << m_Population->getBestEnergy() << "\n";
+			std::cout << m_Generation << "\t" << avgFitness << "\t" << m_Population->getBestEnergy() << "\n";
 		}
 
-		if (counter >= 10)
+		if (m_Population->getBestEnergy() >= m_Energy)
 		{
-			possible = false;
-			break;
+			m_DrawConformation = new Conformation(m_Population->getBestConformation());
+			m_Energy = m_Population->getBestEnergy();
+			gBestEnergy = m_Energy;
 		}
-
-		currentCell = nextCell;
-		m_Elements[i].setDirection(direction);
 	}
 
-	if (!possible) foldRandom();
-	std::cout << this->calculateEnergy();
+	gAvg = avgFitness;
+	m_Logfile.close();
 }
 
-sf::Vector2i Algorithm::calculateNextCell(sf::Vector2i &currentCell, Direction *direction)
+void Algorithm::update()
 {
-		sf::Vector2i nextCell = currentCell;
-		switch (*direction)
+	if (m_Generation < m_MaxGeneration)
+	{
+		m_Generation++;
+		m_Population->selection();
+		m_Population->crossover();
+		m_Population->mutation();
+
+		float avgFitness = m_Population->evaluation();
+		m_Logfile << m_Generation << "\t" << avgFitness << "\t" << m_Population->getBestEnergy() << "\n";
+		std::cout << m_Generation << "\t" << avgFitness << "\t" << m_Population->getBestEnergy() << "\n";
+
+		if (m_Population->getBestEnergy() >= m_Energy)
 		{
-		case North:
-			nextCell.y -= 1;
-			break;
-		case South:
-			nextCell.y += 1;
-			break;
-		case West:
-			nextCell.x -= 1;
-			break;
-		case East:
-			nextCell.x += 1;
-			break;
-		default:
-			break;
+			m_DrawConformation = new Conformation(m_Population->getBestConformation());
+			m_Energy = m_Population->getBestEnergy();
+			gBestEnergy = m_Energy;
 		}
-
-		return nextCell;
-}
-
-bool Algorithm::isDirectionPossible(sf::Vector2i position) 
-{	
-	// X position out of bounds
-	if (!(position.x >= 0 && position.x < m_Array.size()))
-	{
-		return false;
 	}
 
-	// Y position out of bounds
-	if (!(position.y >= 0 && position.y < m_Array.size()))
-	{
-		return false;
-	}
-
-	// Cell is already occupied
-	if (m_Array[position.y][position.x] != NULL)
-	{
-		return false;
-	}
-
-	// No problems occured, direction is possible
-	return true;
-}
-
-void Algorithm::readProteinsFromString(const std::string &proteins)
-{
-	m_Elements.clear();
-	int ASCII_Offset = 48;
-
-	for (int i = 0; i < proteins.length(); ++i)
-	{
-		bool hydrophobe = (bool) (proteins.at(i) - ASCII_Offset);
-		Element element(!hydrophobe, i);
-		m_Elements.push_back(element);
-	}
-}
-
-Element* Algorithm::getElement(int x, int y)
-{
-	if ((x >= 0 && x < m_Array.size()) && 
-		(y >= 0 && y < m_Array.size()))
-	{
-		return m_Array[y][x];
-	}
+	// Algorithm is done, clean up
 	else
 	{
-		return NULL;
+		m_Logfile.close();
 	}
 }
 
-int Algorithm::calculateEnergy(std::vector<Element> folding) {
-	int energy = 0;
-
-	for (int i = 0; i < m_Elements.size(); ++i)
-	{
-		if (m_Elements[i].isHydrophobe())
-		{
-			sf::Vector2i coordinates = m_Elements[i].getRenderer().getCoordinates();
-			Element *element = &m_Elements[i];
-			Element *adjacentElement = NULL;
-
-			// Check overlapping elements
-
-		
-			// Check right
-			if (adjacentElement = getElement(coordinates.x + 1, coordinates.y))
-			{
-				if (!isSequenceNeighbour(element, adjacentElement) && adjacentElement->isHydrophobe())
-				{
-					energy++;
-				}
-			}
-
-			// Check left
-			if (adjacentElement = getElement(coordinates.x - 1, coordinates.y))
-			{
-				if (!isSequenceNeighbour(element, adjacentElement) && adjacentElement->isHydrophobe())
-				{
-					energy++;
-				}
-			}
-
-			// Check bottom
-			if (adjacentElement = getElement(coordinates.x, coordinates.y + 1))
-			{
-				if (!isSequenceNeighbour(element, adjacentElement) && adjacentElement->isHydrophobe())
-				{
-					energy++;
-				}
-			}
-
-			// Check top
-			if (adjacentElement = getElement(coordinates.x, coordinates.y - 1))
-			{
-				if (!isSequenceNeighbour(element, adjacentElement) && adjacentElement->isHydrophobe())
-				{
-					energy++;
-				}
-			}
-		}
-	}
-
-	// All neighbors are counted twice
-	energy /= 2;
-	m_Energy = energy;
-	return m_Energy;	
-}
-
-int Algorithm::calculateEnergy()
+void Algorithm::setUp(int maxGeneration, int populationSize, std::string &chain, float mutationRate, float crossoverRate, Selection *selection)
 {
-	return calculateEnergy();
-}
+	m_Energy = 0;
+	gBestEnergy = 0;
+	gAvg = 0;
+	m_MaxGeneration = maxGeneration;
 
-bool Algorithm::isSequenceNeighbour(Element *lhs, Element *rhs)
-{
-	return (lhs->getIndex() == rhs->getIndex() - 1 || lhs->getIndex() == rhs->getIndex() + 1);
+	m_Generation = 0;
+	m_Chain = chain;
+	m_MutationRate = mutationRate;
+	m_CrossoverRate = crossoverRate;
+
+	m_Population = new Population(chain, populationSize, mutationRate, crossoverRate, selection);
+	m_Population->createInitialPopulation();
+	float avgFitness = m_Population->evaluation();
+
+	gAvg = avgFitness;
+	m_Logfile.open("average.txt");
 }

@@ -4,9 +4,6 @@
 #include <fstream>
 #include <iostream>
 #include "algorithm.h"
-#include "tournamentSelection.h"
-#include "bestWinsTournament.h"
-#include "probabilityTournament.h"
 
 std::string SEQ20 = "10100110100101100101";
 std::string SEQ24 = "110010010010010010010011";
@@ -14,13 +11,8 @@ std::string SEQ25 = "0010011000011000011000011";
 std::string SEQ36 = "000110011000001111111001100001100100";
 std::string SEQ48 = "001001100110000011111111110000001100110010011111";
 std::string SEQ50 = "11010101011110100010001000010001000101111010101011";
-std::string SEQ60 = "001110111111110001111111111010001111111111110000111111011010";	// 60	36
-std::string SEQ64 = "1111111111110101001100110010011001100100110011001010111111111111";	// 64	42
-std::string SEQ85 = "1111000011111111111100000011111111111100011111111111100011111111111100010011001100101"; // 85	53
-std::string SEQ100 = "0001100111100111011011011110000000011111100111111000000000101101111111111100111011010010111000000111"; // 100	50
-std::string SEQ100_2 = "0000001011000001110111110110000110011011111011111111110110111111100000000000111111100101110000001011"; // 100	48
+std::string SEQ100 = "1101010101111010001000100001000100010111101010101111010101011110100010001000010001000101111010101011";
 
-void testTournaments(Algorithm &algorithm);
 void testRates(Algorithm &algorithm);
  int main()
  {
@@ -29,7 +21,7 @@ void testRates(Algorithm &algorithm);
 	 float moveSpeed = 15.f;
 	 float scaleSpeed = 0.05f;
 
-     sf::RenderWindow window(sf::VideoMode(1024, 600), "Genetic algorithms - Norman Ackermann, Manuel Reinfurt");
+     sf::RenderWindow window(sf::VideoMode(800, 600), "Genetic algorithms - Norman Ackermann, Manuel Reinfurt");
 	 sf::View view(sf::FloatRect(0, 0, window.getSize().x, window.getSize().y));
 	 window.setVerticalSyncEnabled(false);
 
@@ -44,13 +36,11 @@ void testRates(Algorithm &algorithm);
 
 	 sf::Text energy(energyText, font, 20);
 	 energy.setPosition(10, 5);
-
-	 algorithm.setUp(20, 5000, SEQ48, 0.08f, 0.30f, new ProbabilityTournament(50, 0.8));
-	 algorithm.run(true);
+	 algorithm.setUp(10, 500, SEQ20, 0.08f, 0.30f);
+	 algorithm.run();
 
      while (window.isOpen())
      {
-
          sf::Event event;
          while (window.pollEvent(event))
          {
@@ -63,14 +53,13 @@ void testRates(Algorithm &algorithm);
 
 				if (event.key.code == sf::Keyboard::Return)
 				{
-					algorithm.setUp(500, 5000, SEQ36, 0.08, 0.30f, new TournamentSelection(2, 80));
+					algorithm.setUp(200, 5000, SEQ50, 0.16f, 0.34f);
 				}
 
 				if (event.key.code == sf::Keyboard::Space)
 				{
-
-					algorithm.setUp(500, 5000, SEQ36, 0.08f, 0.30f, new BestWinsTournament(2));
-					algorithm.run(true);
+					algorithm.setUp(500, 5000, SEQ50, 0.08f, 0.30f);
+					algorithm.run();
 				}
 				 
 				if (event.key.code == sf::Keyboard::R)
@@ -126,30 +115,6 @@ void testRates(Algorithm &algorithm);
      return EXIT_SUCCESS;
  }
 
- void testTournaments(Algorithm &algorithm)
- {
-	 std::ofstream logfile("tournamentTest.txt");
-
-	 int tournamentSize = 2;
-	 int generations = 250;
-	 int populationSize = 5000;
-
-	 float mutationRate = 0.08f;
-	 float crossoverRate = 0.6f;
-
-	 for (int k = tournamentSize; k < populationSize; ++k)
-	 {
-		 algorithm.setUp(generations, populationSize, SEQ48, mutationRate, crossoverRate / 2.0f, new BestWinsTournament(k));
-		 algorithm.run(false);
-
-		 float average = algorithm.gAvg;
-		 logfile << k << "\t" << average << "\t" << "\n";
-		 std::cout << k << "\t" << average << "\t" << std::endl;
-	 }
-
-	 logfile.close();
- }
-
  void testRates(Algorithm &algorithm)
  {
 	 float mutationRate = 0.04f;
@@ -167,11 +132,11 @@ void testRates(Algorithm &algorithm);
 			 float average = 0;
 			 float cumulativeEnergy = 0;
 
-			 for (int i = 0; i < 10; ++i)
+			 for (int i = 0; i < 15; ++i)
 			 {
-				 algorithm.setUp(500, 5000, SEQ50, mutationRate, crossoverRate, new TournamentSelection(2, 80));
-				 algorithm.run(false);
-				 cumulativeEnergy += algorithm.gAvg;
+				 algorithm.setUp(1500, 150, SEQ20, mutationRate, crossoverRate);
+				 algorithm.run();
+				 cumulativeEnergy+= algorithm.gAvg;
 			 }
 
 			 average = cumulativeEnergy / 10;

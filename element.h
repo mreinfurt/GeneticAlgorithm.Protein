@@ -1,13 +1,22 @@
 #pragma once
-#include "elementRenderer.h"
+#include <SFML\Graphics.hpp>
 
-enum Direction {
+enum ScreenDirection {
 	North,
 	South,
 	West,
 	East
 };
 
+enum Direction {
+	None,
+	Left,
+	Right,
+	Straight
+};
+
+/// Element
+/// Represents one element of the protein chain, identified by it's index
 class Element {
 	public:
 		Element(bool hydrophile, int index);
@@ -20,12 +29,17 @@ class Element {
 
 		int getIndex() { return m_Index; }
 
-		ElementRenderer& getRenderer() { return m_Renderer; }
+		sf::Vector2i& getPosition();
+		void setPosition(sf::Vector2i &position);
+
+		sf::Vector2i getCoordinates() const;
+
+		static int m_Offset;
+		static int m_Size;
 
 	private:
 		bool m_Hydrophile;
 		int m_Index;
-		Direction m_Direction;
-		
-		ElementRenderer m_Renderer;
+		Direction m_Direction;		
+		sf::Vector2i m_Position;
 };
