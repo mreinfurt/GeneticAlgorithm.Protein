@@ -24,7 +24,34 @@
     <ClCompile Include="algorithm.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="elementRenderer.cpp">
+    <ClCompile Include="conformation.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="population.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="utility.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="selection.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="tournamentSelection.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="fitnessProportionalSelection.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="mutation.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="localSearch.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="bestWinsTournament.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="probabilityTournament.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
   </ItemGroup>
@@ -32,10 +59,37 @@
     <ClInclude Include="element.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="elementRenderer.h">
+    <ClInclude Include="algorithm.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="algorithm.h">
+    <ClInclude Include="population.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="conformation.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="utility.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="selection.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="tournamentSelection.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="fitnessProportionalSelection.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="mutation.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="localSearch.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="bestWinsTournament.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="probabilityTournament.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>
