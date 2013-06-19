@@ -45,7 +45,7 @@ void testRates(Algorithm &algorithm);
 	 sf::Text energy(energyText, font, 20);
 	 energy.setPosition(10, 5);
 
-	 algorithm.setUp(20, 5000, SEQ48, 0.08f, 0.30f, new ProbabilityTournament(50, 0.8));
+	 algorithm.setUp(20, 5000, SEQ48, 0.08f, 0.30f, new TournamentSelection(2, 0.8));
 	 algorithm.run(true);
 
      while (window.isOpen())
