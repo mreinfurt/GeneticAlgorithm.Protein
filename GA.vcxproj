@@ -91,7 +91,6 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="population.cpp" />
     <ClCompile Include="probabilityTournament.cpp" />
-    <ClCompile Include="selection.cpp" />
     <ClCompile Include="tournamentSelection.cpp" />
     <ClCompile Include="utility.cpp" />
   </ItemGroup>

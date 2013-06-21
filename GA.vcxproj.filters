@@ -39,9 +39,6 @@
     <ClCompile Include="utility.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="selection.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
     <ClCompile Include="fitnessProportionalSelection.cpp">
       <Filter>Quelldateien\Selection</Filter>
     </ClCompile>
