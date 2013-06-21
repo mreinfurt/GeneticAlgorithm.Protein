@@ -88,9 +88,7 @@
     <ClCompile Include="conformation.cpp" />
     <ClCompile Include="element.cpp" />
     <ClCompile Include="fitnessProportionalSelection.cpp" />
-    <ClCompile Include="localSearch.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="mutation.cpp" />
     <ClCompile Include="population.cpp" />
     <ClCompile Include="probabilityTournament.cpp" />
     <ClCompile Include="selection.cpp" />
@@ -103,8 +101,6 @@
     <ClInclude Include="conformation.h" />
     <ClInclude Include="element.h" />
     <ClInclude Include="fitnessProportionalSelection.h" />
-    <ClInclude Include="localSearch.h" />
-    <ClInclude Include="mutation.h" />
     <ClInclude Include="population.h" />
     <ClInclude Include="probabilityTournament.h" />
     <ClInclude Include="selection.h" />

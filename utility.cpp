@@ -31,6 +31,40 @@ ScreenDirection calculateDirection(ScreenDirection currDir, Direction elemDir)
 		return ScreenDirection::East;
 
 	// West
-	else if (SW || LN || RS)
+	else // if (SW || LN || RS)
 		return ScreenDirection::West;
+}
+
+sf::Vector2i& calculateNextCell(sf::Vector2i &currentCell, ScreenDirection direction)
+{
+	sf::Vector2i &nextCell = currentCell;
+	switch (direction)
+	{
+	case North:
+		nextCell.y -= 1;
+		break;
+	case South:
+		nextCell.y += 1;
+		break;
+	case West:
+		nextCell.x -= 1;
+		break;
+	case East:
+		nextCell.x += 1;
+		break;
+	default:
+		break;
+	}
+
+	return nextCell;
+}
+
+bool isSequenceNeighbour(Element *lhs, Element *rhs)
+{
+	return (lhs->getIndex() == rhs->getIndex() - 1 || lhs->getIndex() == rhs->getIndex() + 1);
+}
+
+Element* getElement(int x, int y, std::vector<std::vector<Element*>> &matrix)
+{
+	return matrix[y][x];
 }

@@ -4,7 +4,7 @@
 Conformation::Conformation(std::vector<Element> &elements) : m_Changed(true)
 {
 	// Copy all elements
-	for (int i = 0; i < elements.size(); ++i)
+	for (unsigned int i = 0; i < elements.size(); ++i)
 	{
 		m_Elements.push_back(elements[i]);
 	}
@@ -37,7 +37,7 @@ void Conformation::crossover(Conformation &conformation)
 	int startElement = rand() % m_Elements.size();
 
 	// Swap all elements till the end
-	for (int i = startElement; i < m_Elements.size(); ++i)
+	for (unsigned int i = startElement; i < m_Elements.size(); ++i)
 	{
 		//std::swap(m_Elements[i], conformation.m_Elements[i]);
 		Direction temp = m_Elements[i].getDirection();

@@ -1,6 +1,5 @@
 #include "tournamentSelection.h"
 
-
 TournamentSelection::TournamentSelection(int size, int winrate) : m_TournamentSize(size), m_WinRate(winrate)
 {
 }
@@ -12,7 +11,7 @@ TournamentSelection::~TournamentSelection(void)
 void TournamentSelection::select(std::vector<Conformation> &conformations)
 {
 	std::vector<Conformation> old = conformations;
-	for (int i = 0; i < conformations.size(); ++i)
+	for (unsigned int i = 0; i < conformations.size(); ++i)
 	{
 		// Select conformations
 		if (m_TournamentSize <= 2)

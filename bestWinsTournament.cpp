@@ -13,7 +13,7 @@ BestWinsTournament::~BestWinsTournament(void)
 void BestWinsTournament::select(std::vector<Conformation> &conformations)
 {
 	std::vector<Conformation> old = conformations;
-	for (int i = 0; i < conformations.size(); ++i)
+	for (unsigned int i = 0; i < conformations.size(); ++i)
 	{
 		Conformation &bestConformation = conformations[rand() % conformations.size()];
 		for (int k = 0; k < m_TournamentSize - 1; ++k)

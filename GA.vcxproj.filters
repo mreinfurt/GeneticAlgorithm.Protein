@@ -13,6 +13,12 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Headerdateien\Selection">
+      <UniqueIdentifier>{6538c259-3a98-49f0-962f-48ec7740768e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Selection">
+      <UniqueIdentifier>{63d02ff0-6017-4229-807c-cf05aae638ae}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -36,23 +42,17 @@
     <ClCompile Include="selection.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="tournamentSelection.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
     <ClCompile Include="fitnessProportionalSelection.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
-    <ClCompile Include="mutation.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
-    <ClCompile Include="localSearch.cpp">
-      <Filter>Quelldateien</Filter>
+      <Filter>Quelldateien\Selection</Filter>
     </ClCompile>
     <ClCompile Include="bestWinsTournament.cpp">
-      <Filter>Quelldateien</Filter>
+      <Filter>Quelldateien\Selection</Filter>
+    </ClCompile>
+    <ClCompile Include="tournamentSelection.cpp">
+      <Filter>Quelldateien\Selection</Filter>
     </ClCompile>
     <ClCompile Include="probabilityTournament.cpp">
-      <Filter>Quelldateien</Filter>
+      <Filter>Quelldateien\Selection</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -75,22 +75,16 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="tournamentSelection.h">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="fitnessProportionalSelection.h">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="mutation.h">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="localSearch.h">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="bestWinsTournament.h">
-      <Filter>Headerdateien</Filter>
+      <Filter>Headerdateien\Selection</Filter>
     </ClInclude>
     <ClInclude Include="probabilityTournament.h">
-      <Filter>Headerdateien</Filter>
+      <Filter>Headerdateien\Selection</Filter>
+    </ClInclude>
+    <ClInclude Include="fitnessProportionalSelection.h">
+      <Filter>Headerdateien\Selection</Filter>
+    </ClInclude>
+    <ClInclude Include="bestWinsTournament.h">
+      <Filter>Headerdateien\Selection</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

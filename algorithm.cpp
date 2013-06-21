@@ -16,8 +16,8 @@ Algorithm::~Algorithm()
 
 void Algorithm::draw()
 {
-	int offset = Element::m_Offset;
-	int size = Element::m_Size;
+	int offset = Element::Offset;
+	float size = Element::Size;
 
 	sf::RectangleShape m_Shape(sf::Vector2f(size, size));
 	m_Shape.setOutlineColor(sf::Color(128, 128, 128, 255));
@@ -27,7 +27,7 @@ void Algorithm::draw()
 
 	std::vector<Element> elements = m_DrawConformation->getElements();
 
-	sf::RectangleShape connectionLine(sf::Vector2f(size, 2));
+	sf::RectangleShape connectionLine(sf::Vector2f(size, 2.0f));
 	connectionLine.setFillColor(sf::Color::White);
 	connectionLine.setPosition(20, offset + size / 2);
 
@@ -39,26 +39,26 @@ void Algorithm::draw()
 		direction = calculateDirection(direction, elements[i].getDirection());
 		sf::Vector2i position = elements[i].getPosition();
 
-		sf::Color fillColor = elements[i].getHydrophile() ? sf::Color::White : sf::Color::Black;
+		sf::Color fillColor = elements[i].isHydrophile() ? sf::Color::White : sf::Color::Black;
 		m_Shape.setFillColor(fillColor);
 
 		switch (direction)
 		{
 			case West:
-				connectionLine.setPosition(position.x - size, position.y + size / 2);
-				connectionLine.setSize(sf::Vector2f(size, 2));
+				connectionLine.setPosition(position.x - size, position.y + size / 2.0f);
+				connectionLine.setSize(sf::Vector2f(size, 2.0f));
 				break;
 			case East:
-				connectionLine.setPosition(position.x + size, position.y + size / 2);
-				connectionLine.setSize(sf::Vector2f(size, 2));
+				connectionLine.setPosition(position.x + size, position.y + size / 2.0f);
+				connectionLine.setSize(sf::Vector2f(size, 2.0f));
 				break;
 			case North:
-				connectionLine.setPosition(position.x + size / 2, position.y - size);
-				connectionLine.setSize(sf::Vector2f(2, size));
+				connectionLine.setPosition(position.x + size / 2.0f, position.y - size);
+				connectionLine.setSize(sf::Vector2f(2.0f, size));
 				break;
 			case South:
-				connectionLine.setPosition(position.x + size / 2, position.y + size);
-				connectionLine.setSize(sf::Vector2f(2, size));
+				connectionLine.setPosition(position.x + size / 2.0f, position.y + size);
+				connectionLine.setSize(sf::Vector2f(2.0f, size));
 				break;
 			default:
 				break;
@@ -97,11 +97,11 @@ void Algorithm::run(bool output)
 		{
 			m_DrawConformation = new Conformation(m_Population->getBestConformation());
 			m_Energy = m_Population->getBestEnergy();
-			gBestEnergy = m_Energy;
+			m_BestEnergy = m_Energy;
 		}
 	}
 
-	gAvg = avgFitness;
+	m_AverageFitness = avgFitness;
 	m_Logfile.close();
 }
 
@@ -122,7 +122,7 @@ void Algorithm::update()
 		{
 			m_DrawConformation = new Conformation(m_Population->getBestConformation());
 			m_Energy = m_Population->getBestEnergy();
-			gBestEnergy = m_Energy;
+			m_BestEnergy = m_Energy;
 		}
 	}
 
@@ -136,8 +136,8 @@ void Algorithm::update()
 void Algorithm::setUp(int maxGeneration, int populationSize, std::string &chain, float mutationRate, float crossoverRate, Selection *selection)
 {
 	m_Energy = 0;
-	gBestEnergy = 0;
-	gAvg = 0;
+	m_BestEnergy = 0;
+	m_AverageFitness = 0;
 	m_MaxGeneration = maxGeneration;
 
 	m_Generation = 0;
@@ -149,6 +149,6 @@ void Algorithm::setUp(int maxGeneration, int populationSize, std::string &chain,
 	m_Population->createInitialPopulation();
 	float avgFitness = m_Population->evaluation();
 
-	gAvg = avgFitness;
+	m_AverageFitness = avgFitness;
 	m_Logfile.open("average.txt");
 }

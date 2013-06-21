@@ -6,7 +6,6 @@
 class Population
 {
 public:
-
 	// Creates population and initializes elements vector
 	Population(std::string &chain, int populationSize, float mutationRate, float crossoverRate, Selection *selection);
 	~Population();
@@ -30,7 +29,7 @@ public:
 	std::vector<Conformation>& Conformations() { return m_Conformations; }
 
 	// Returns best energy value of this population
-	float getBestEnergy() const { return m_BestEnergy; }
+	int getBestEnergy() const { return m_BestEnergy; }
 	const Conformation& getBestConformation();
 
 private:
@@ -46,12 +45,12 @@ private:
 	// The original protein chain
 	std::string m_Chain;
 	float m_CumulativeEnergy;
-	float m_BestEnergy;
+	int m_BestEnergy;
 	int m_PopulationSize;
 	float m_MutationRate;
 	float m_CrossoverRate;
 	float m_CrossoverCount;
-	Conformation *m_BestConformation;
 	int m_SumFitness;
-	int m_TournamentSize;
+
+	Conformation *m_BestConformation;
 };

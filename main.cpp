@@ -45,7 +45,7 @@ void testRates(Algorithm &algorithm);
 	 sf::Text energy(energyText, font, 20);
 	 energy.setPosition(10, 5);
 
-	 algorithm.setUp(20, 5000, SEQ48, 0.08f, 0.30f, new TournamentSelection(2, 0.8));
+	 algorithm.setUp(20, 5000, SEQ48, 0.08f, 0.30f, new TournamentSelection(2.0f, 0.8f));
 	 algorithm.run(true);
 
      while (window.isOpen())
@@ -63,12 +63,11 @@ void testRates(Algorithm &algorithm);
 
 				if (event.key.code == sf::Keyboard::Return)
 				{
-					algorithm.setUp(500, 5000, SEQ36, 0.08, 0.30f, new TournamentSelection(2, 80));
+					algorithm.setUp(500, 5000, SEQ36, 0.08, 0.30f, new TournamentSelection(2.0, 80.0f));
 				}
 
 				if (event.key.code == sf::Keyboard::Space)
 				{
-
 					algorithm.setUp(500, 5000, SEQ36, 0.08f, 0.30f, new BestWinsTournament(2));
 					algorithm.run(true);
 				}
@@ -142,7 +141,7 @@ void testRates(Algorithm &algorithm);
 		 algorithm.setUp(generations, populationSize, SEQ48, mutationRate, crossoverRate / 2.0f, new BestWinsTournament(k));
 		 algorithm.run(false);
 
-		 float average = algorithm.gAvg;
+		 float average = algorithm.getAverageFitness();
 		 logfile << k << "\t" << average << "\t" << "\n";
 		 std::cout << k << "\t" << average << "\t" << std::endl;
 	 }
@@ -171,13 +170,13 @@ void testRates(Algorithm &algorithm);
 			 {
 				 algorithm.setUp(500, 5000, SEQ50, mutationRate, crossoverRate, new TournamentSelection(2, 80));
 				 algorithm.run(false);
-				 cumulativeEnergy += algorithm.gAvg;
+				 cumulativeEnergy += algorithm.getAverageFitness();
 			 }
 
 			 average = cumulativeEnergy / 10;
 			 
 			 logfile << average << "\t";
-			 std::cout << mutationRate << "\t" << (crossoverRate * 2) << "\t" << average << "\t" << algorithm.gBestEnergy << "\n";
+			 std::cout << mutationRate << "\t" << (crossoverRate * 2) << "\t" << average << "\t" << algorithm.getBestEnergy() << "\n";
 
 			 crossoverRate += 0.01f;
 		 }

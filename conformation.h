@@ -7,6 +7,7 @@
 class Conformation 
 {
 public:
+	// Ctor
 	Conformation(std::vector<Element> &elements);
 
 	// Mutates one random direction of the elements vector
@@ -15,11 +16,14 @@ public:
 	// Selects a position and connects this conformation with the new one
 	void crossover(Conformation &conformation);
 
+	// Returns the vector of elements
 	std::vector<Element>& getElements() { return m_Elements; }
 
+	// Has the conformation changed?
 	bool hasChanged() const { return m_Changed; }
 	void setHasChanged(bool val) { m_Changed = val; }
 
+	// Returns the current energy of the conformation
 	int getEnergy() const { return m_Energy; }
 	void setEnergy(int val) { m_Energy = val; }
 

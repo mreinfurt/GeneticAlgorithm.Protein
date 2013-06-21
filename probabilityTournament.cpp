@@ -14,7 +14,7 @@ ProbabilityTournament::~ProbabilityTournament(void)
 void ProbabilityTournament::select(std::vector<Conformation> &conformations)
 {
 	std::vector<Conformation> old = conformations;
-	for (int i = 0; i < conformations.size(); ++i)
+	for (unsigned int i = 0; i < conformations.size(); ++i)
 	{
 		std::vector<Conformation*> sorted(m_TournamentSize);
 
