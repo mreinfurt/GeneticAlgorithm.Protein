@@ -21,7 +21,7 @@ class Algorithm {
 		void update();
 
 		// Set up all parameters
-		void setUp(int maxGeneration, int populationSize, std::string &chain, float mutationRate, float crossoverRate, Selection *selection);
+		void setUp(int maxGeneration, int populationSize, std::string &chain, float mutationRate, float crossoverRate, Selection *selection, std::string &file = (std::string)"average.txt");
 
 		// Returns the energy of the draw conformation
 		int getEnergy() { return m_Energy; }

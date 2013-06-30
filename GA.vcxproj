@@ -41,8 +41,8 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>C:\Users\Manuel Reinfurt\SkyDrive\Studium\GA\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\Manuel Reinfurt\SkyDrive\Studium\GA\Libs;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Users\Manuel\SkyDrive\Studium\GA\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\Manuel\SkyDrive\Studium\GA\Libs;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -85,24 +85,28 @@
   <ItemGroup>
     <ClCompile Include="algorithm.cpp" />
     <ClCompile Include="bestWinsTournament.cpp" />
+    <ClCompile Include="bracket.cpp" />
     <ClCompile Include="conformation.cpp" />
     <ClCompile Include="element.cpp" />
     <ClCompile Include="fitnessProportionalSelection.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="population.cpp" />
     <ClCompile Include="probabilityTournament.cpp" />
+    <ClCompile Include="singleElimination.cpp" />
     <ClCompile Include="tournamentSelection.cpp" />
     <ClCompile Include="utility.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="algorithm.h" />
     <ClInclude Include="bestWinsTournament.h" />
+    <ClInclude Include="bracket.h" />
     <ClInclude Include="conformation.h" />
     <ClInclude Include="element.h" />
     <ClInclude Include="fitnessProportionalSelection.h" />
     <ClInclude Include="population.h" />
     <ClInclude Include="probabilityTournament.h" />
     <ClInclude Include="selection.h" />
+    <ClInclude Include="singleElimination.h" />
     <ClInclude Include="tournamentSelection.h" />
     <ClInclude Include="utility.h" />
   </ItemGroup>

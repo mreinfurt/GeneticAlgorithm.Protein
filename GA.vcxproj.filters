@@ -51,6 +51,12 @@
     <ClCompile Include="probabilityTournament.cpp">
       <Filter>Quelldateien\Selection</Filter>
     </ClCompile>
+    <ClCompile Include="singleElimination.cpp">
+      <Filter>Quelldateien\Selection</Filter>
+    </ClCompile>
+    <ClCompile Include="bracket.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="element.h">
@@ -82,6 +88,12 @@
     </ClInclude>
     <ClInclude Include="bestWinsTournament.h">
       <Filter>Headerdateien\Selection</Filter>
+    </ClInclude>
+    <ClInclude Include="singleElimination.h">
+      <Filter>Headerdateien\Selection</Filter>
+    </ClInclude>
+    <ClInclude Include="bracket.h">
+      <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

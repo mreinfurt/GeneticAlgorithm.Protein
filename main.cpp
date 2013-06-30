@@ -7,6 +7,8 @@
 #include "tournamentSelection.h"
 #include "bestWinsTournament.h"
 #include "probabilityTournament.h"
+#include "singleElimination.h"
+#include <sstream>
 
 std::string SEQ20 = "10100110100101100101";
 std::string SEQ24 = "110010010010010010010011";
@@ -45,12 +47,13 @@ void testRates(Algorithm &algorithm);
 	 sf::Text energy(energyText, font, 20);
 	 energy.setPosition(10, 5);
 
-	 algorithm.setUp(20, 5000, SEQ48, 0.08f, 0.30f, new TournamentSelection(2.0f, 0.8f));
+	 //		testTournaments(algorithm);
+
+	 algorithm.setUp(1, 5, SEQ48, 0.08f, 0.30f, new TournamentSelection(2.0f, 0.8f));
 	 algorithm.run(true);
 
      while (window.isOpen())
      {
-
          sf::Event event;
          while (window.pollEvent(event))
          {
@@ -60,15 +63,14 @@ void testRates(Algorithm &algorithm);
 
 			 if (event.type == sf::Event::KeyPressed)
 			 {
-
 				if (event.key.code == sf::Keyboard::Return)
 				{
 					algorithm.setUp(500, 5000, SEQ36, 0.08, 0.30f, new TournamentSelection(2.0, 80.0f));
 				}
-
+					
 				if (event.key.code == sf::Keyboard::Space)
 				{
-					algorithm.setUp(500, 5000, SEQ36, 0.08f, 0.30f, new BestWinsTournament(2));
+					algorithm.setUp(250, 5000, SEQ50, 0.08f, 0.30f, new SingleElimination(32, 80.0f));
 					algorithm.run(true);
 				}
 				 
@@ -136,10 +138,15 @@ void testRates(Algorithm &algorithm);
 	 float mutationRate = 0.08f;
 	 float crossoverRate = 0.6f;
 
+
+
 	 for (int k = tournamentSize; k < populationSize; ++k)
 	 {
-		 algorithm.setUp(generations, populationSize, SEQ48, mutationRate, crossoverRate / 2.0f, new BestWinsTournament(k));
-		 algorithm.run(false);
+		 std::stringstream fileStream;
+	     fileStream << k << " - probability.txt";
+		 std::string file = fileStream.str();
+		 algorithm.setUp(generations, populationSize, SEQ50, mutationRate, crossoverRate / 2.0f, new ProbabilityTournament(k, 75), file);
+		 algorithm.run(true);
 
 		 float average = algorithm.getAverageFitness();
 		 logfile << k << "\t" << average << "\t" << "\n";

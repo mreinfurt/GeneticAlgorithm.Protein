@@ -133,7 +133,7 @@ void Algorithm::update()
 	}
 }
 
-void Algorithm::setUp(int maxGeneration, int populationSize, std::string &chain, float mutationRate, float crossoverRate, Selection *selection)
+void Algorithm::setUp(int maxGeneration, int populationSize, std::string &chain, float mutationRate, float crossoverRate, Selection *selection, std::string &file)
 {
 	m_Energy = 0;
 	m_BestEnergy = 0;
@@ -150,5 +150,5 @@ void Algorithm::setUp(int maxGeneration, int populationSize, std::string &chain,
 	float avgFitness = m_Population->evaluation();
 
 	m_AverageFitness = avgFitness;
-	m_Logfile.open("average.txt");
+	m_Logfile.open(file);
 }
