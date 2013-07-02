@@ -65,12 +65,12 @@ void testRates(Algorithm &algorithm);
 			 {
 				if (event.key.code == sf::Keyboard::Return)
 				{
-					algorithm.setUp(500, 5000, SEQ36, 0.08, 0.30f, new TournamentSelection(2.0, 80.0f));
+					algorithm.setUp(250, 5000, SEQ20, 0.08, 0.30f, new TournamentSelection(2.0, 80.0f));
 				}
 					
 				if (event.key.code == sf::Keyboard::Space)
 				{
-					algorithm.setUp(250, 5000, SEQ50, 0.08f, 0.30f, new SingleElimination(32, 80.0f));
+					algorithm.setUp(250, 5000, SEQ50, 0.08f, 0.30f, new ProbabilityTournament(2, 75.0f));
 					algorithm.run(true);
 				}
 				 
