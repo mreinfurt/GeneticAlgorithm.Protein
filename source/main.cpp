@@ -24,56 +24,57 @@ std::string SEQ100_2 = "00000010110000011101111101100001100110111110111111111101
 
 void testTournaments(Algorithm &algorithm);
 void testRates(Algorithm &algorithm);
- int main()
- {
-	 // Camera/View attributes
-	 float scale = 1.0f;
-	 float moveSpeed = 15.f;
-	 float scaleSpeed = 0.05f;
 
-     sf::RenderWindow window(sf::VideoMode(1024, 600), "Genetic algorithms - Norman Ackermann, Manuel Reinfurt");
-	 sf::View view(sf::FloatRect(0, 0, window.getSize().x, window.getSize().y));
-	 window.setVerticalSyncEnabled(false);
+int main()
+{
+	// Camera/View attributes
+	float scale = 1.0f;
+	float moveSpeed = 15.f;
+	float scaleSpeed = 0.05f;
 
-	 Algorithm algorithm(window);
+	sf::RenderWindow window(sf::VideoMode(1024, 600), "Genetic algorithms - Norman Ackermann, Manuel Reinfurt");
+	sf::View view(sf::FloatRect(0, 0, window.getSize().x, window.getSize().y));
+	window.setVerticalSyncEnabled(false);
 
-     sf::Font font;
-     if (!font.loadFromFile("resources/fonts/Sansation.ttf"))
-         return EXIT_FAILURE;
+	Algorithm algorithm(window);
 
-	 std::string energyText = "Energy: ";
-	 energyText.append(std::to_string((algorithm.getEnergy())));
+	sf::Font font;
+	if (!font.loadFromFile("resources/fonts/Sansation.ttf"))
+		return EXIT_FAILURE;
 
-	 sf::Text energy(energyText, font, 20);
-	 energy.setPosition(10, 5);
+	std::string energyText = "Energy: ";
+	energyText.append(std::to_string((algorithm.getEnergy())));
 
-	 //		testTournaments(algorithm);
+	sf::Text energy(energyText, font, 20);
+	energy.setPosition(10, 5);
 
-	 algorithm.setUp(1, 5, SEQ48, 0.08f, 0.30f, new TournamentSelection(2.0f, 0.8f));
-	 algorithm.run(true);
+	//		testTournaments(algorithm);
 
-     while (window.isOpen())
-     {
-         sf::Event event;
-         while (window.pollEvent(event))
-         {
-			 #pragma region User Input
-             if (event.type == sf::Event::Closed || sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
-                 window.close();
+	algorithm.setUp(1, 5, SEQ48, 0.08f, 0.30f, new TournamentSelection(2.0f, 0.8f));
+	algorithm.run(true);
 
-			 if (event.type == sf::Event::KeyPressed)
-			 {
+	while (window.isOpen())
+	{
+		sf::Event event;
+		while (window.pollEvent(event))
+		{
+#pragma region User Input
+			if (event.type == sf::Event::Closed || sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
+				window.close();
+
+			if (event.type == sf::Event::KeyPressed)
+			{
 				if (event.key.code == sf::Keyboard::Return)
 				{
 					algorithm.setUp(250, 5000, SEQ20, 0.08, 0.30f, new TournamentSelection(2.0, 80.0f));
 				}
-					
+
 				if (event.key.code == sf::Keyboard::Space)
 				{
 					algorithm.setUp(250, 5000, SEQ50, 0.08f, 0.30f, new ProbabilityTournament(2, 75.0f));
 					algorithm.run(true);
 				}
-				 
+
 				if (event.key.code == sf::Keyboard::R)
 				{
 					scale = 1.0f;
@@ -105,95 +106,106 @@ void testRates(Algorithm &algorithm);
 				{
 					scale += scaleSpeed;
 				}
-			 }
-			#pragma endregion 
-         }
+			}
+#pragma endregion 
+		}
 
-		 std::string energyText = "Energy: ";
-		 energyText.append(std::to_string((algorithm.getEnergy())));	
-		 energy.setString(energyText);
+		std::string energyText = "Energy: ";
+		energyText.append(std::to_string((algorithm.getEnergy())));
+		energy.setString(energyText);
 
-		 // Set our camera
-		 view.setViewport(sf::FloatRect(0, 0, scale, scale));
+		// Set our camera
+		view.setViewport(sf::FloatRect(0, 0, scale, scale));
 
-		 window.clear(sf::Color(60, 90, 130, 255));
-		 window.setView(view);
-			algorithm.update();
-			algorithm.draw();
-			window.draw(energy);
-		 window.display();
-     }
- 
-     return EXIT_SUCCESS;
- }
+		window.clear(sf::Color(60, 90, 130, 255));
+		window.setView(view);
+		algorithm.update();
+		algorithm.draw();
+		window.draw(energy);
+		window.display();
+	}
 
- void testTournaments(Algorithm &algorithm)
- {
-	 std::ofstream logfile("logs/tournamentTest.txt");
+	return EXIT_SUCCESS;
+}
 
-	 int tournamentSize = 2;
-	 int generations = 250;
-	 int populationSize = 5000;
+/// <summary>
+/// Completes a full test of the specified algorithm using tournament selection. 
+/// It'll run through several iterations and logs the average fitness.
+/// This will take several minutes to hours.
+/// </summary>
+/// <param name="algorithm">The algorithm.</param>
+void testTournaments(Algorithm &algorithm)
+{
+	std::ofstream logfile("logs/tournamentTest.txt");
 
-	 float mutationRate = 0.08f;
-	 float crossoverRate = 0.6f;
+	int tournamentSize = 2;
+	int generations = 250;
+	int populationSize = 5000;
+
+	float mutationRate = 0.08f;
+	float crossoverRate = 0.6f;
 
 
 
-	 for (int k = tournamentSize; k < populationSize; ++k)
-	 {
-		 std::stringstream fileStream;
-	     fileStream << k << " - probability.txt";
-		 std::string file = fileStream.str();
-		 algorithm.setUp(generations, populationSize, SEQ50, mutationRate, crossoverRate / 2.0f, new ProbabilityTournament(k, 75), file);
-		 algorithm.run(true);
+	for (int k = tournamentSize; k < populationSize; ++k)
+	{
+		std::stringstream fileStream;
+		fileStream << k << " - probability.txt";
+		std::string file = fileStream.str();
+		algorithm.setUp(generations, populationSize, SEQ50, mutationRate, crossoverRate / 2.0f, new ProbabilityTournament(k, 75), file);
+		algorithm.run(true);
 
-		 float average = algorithm.getAverageFitness();
-		 logfile << k << "\t" << average << "\t" << "\n";
-		 std::cout << k << "\t" << average << "\t" << std::endl;
-	 }
+		float average = algorithm.getAverageFitness();
+		logfile << k << "\t" << average << "\t" << "\n";
+		std::cout << k << "\t" << average << "\t" << std::endl;
+	}
 
-	 logfile.close();
- }
+	logfile.close();
+}
 
- void testRates(Algorithm &algorithm)
- {
-	 float mutationRate = 0.04f;
-	 float crossoverRate = 0.15f;
+/// <summary>
+/// Completes a full test of the specified algorithm. It'll run through several iterations and logs the average fitness.
+/// This will take several minutes to hours.
+/// </summary>
+/// <param name="algorithm">The algorithm.</param>
+void testRates(Algorithm &algorithm)
+{
+	float mutationRate = 0.04f;
+	float crossoverRate = 0.15f;
 
-	 std::ofstream logfile;
-	 logfile.open("logs/testRates.txt");
+	std::ofstream logfile;
+	logfile.open("logs/testRates.txt");
 
-	 for (int m = 0; m <= 9; ++m)
-	 {
-		 logfile << mutationRate << "\t";
+	for (int m = 0; m <= 9; ++m)
+	{
+		logfile << mutationRate << "\t";
 
-		 for (int c = 0; c <= 20; ++c)
-		 {
-			 float average = 0;
-			 float cumulativeEnergy = 0;
+		for (int c = 0; c <= 20; ++c)
+		{
+			float average = 0;
+			float cumulativeEnergy = 0;
 
-			 for (int i = 0; i < 10; ++i)
-			 {
-				 algorithm.setUp(500, 5000, SEQ50, mutationRate, crossoverRate, new TournamentSelection(2, 80));
-				 algorithm.run(false);
-				 cumulativeEnergy += algorithm.getAverageFitness();
-			 }
+			for (int i = 0; i < 10; ++i)
+			{
+				algorithm.setUp(500, 5000, SEQ50, mutationRate, crossoverRate, new TournamentSelection(2, 80));
+				algorithm.run(false);
+				cumulativeEnergy += algorithm.getAverageFitness();
+			}
 
-			 average = cumulativeEnergy / 10;
-			 
-			 logfile << average << "\t";
-			 std::cout << mutationRate << "\t" << (crossoverRate * 2) << "\t" << average << "\t" << algorithm.getBestEnergy() << "\n";
+			average = cumulativeEnergy / 10;
 
-			 crossoverRate += 0.01f;
-		 }
+			logfile << average << "\t";
+			std::cout << mutationRate << "\t" << (crossoverRate * 2) << "\t" << average << "\t" << algorithm.getBestEnergy() << "\n";
 
-		 logfile << "\n";
-		 std::cout << "\n";
+			crossoverRate += 0.01f;
+		}
 
-		 crossoverRate = 0.15f;
-		 mutationRate += 0.01f;
-	 }
+		logfile << "\n";
+		std::cout << "\n";
 
-	 logfile.close();
- }
+		crossoverRate = 0.15f;
+		mutationRate += 0.01f;
+	}
+
+	logfile.close();
+}

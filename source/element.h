@@ -1,6 +1,9 @@
 #pragma once
 #include <SFML\Graphics.hpp>
 
+/// <summary>
+/// The translated direction for the screen
+/// </summary>
 enum ScreenDirection {
 	North,
 	South,
@@ -8,6 +11,9 @@ enum ScreenDirection {
 	East
 };
 
+/// <summary>
+/// The possible directions a single element can have.
+/// </summary>
 enum Direction {
 	None,
 	Left,
