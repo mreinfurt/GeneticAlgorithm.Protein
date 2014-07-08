@@ -38,7 +38,7 @@ void testRates(Algorithm &algorithm);
 	 Algorithm algorithm(window);
 
      sf::Font font;
-     if (!font.loadFromFile("Sansation.ttf"))
+     if (!font.loadFromFile("resources/fonts/Sansation.ttf"))
          return EXIT_FAILURE;
 
 	 std::string energyText = "Energy: ";
