@@ -1,5 +1,4 @@
 #include "probabilityTournament.h"
-#include <cmath.h>
 
 ProbabilityTournament::ProbabilityTournament(int size, int winRate) : m_TournamentSize(size), m_WinRate(winRate)
 {
