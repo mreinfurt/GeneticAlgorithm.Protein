@@ -10,6 +10,34 @@
       <Platform>Win32</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="source\algorithm.h" />
+    <ClInclude Include="source\bracket.h" />
+    <ClInclude Include="source\conformation.h" />
+    <ClInclude Include="source\element.h" />
+    <ClInclude Include="source\population.h" />
+    <ClInclude Include="source\selection.h" />
+    <ClInclude Include="source\selection\bestWinsTournament.h" />
+    <ClInclude Include="source\selection\fitnessProportionalSelection.h" />
+    <ClInclude Include="source\selection\probabilityTournament.h" />
+    <ClInclude Include="source\selection\singleElimination.h" />
+    <ClInclude Include="source\selection\tournamentSelection.h" />
+    <ClInclude Include="source\utility.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="source\algorithm.cpp" />
+    <ClCompile Include="source\bracket.cpp" />
+    <ClCompile Include="source\conformation.cpp" />
+    <ClCompile Include="source\element.cpp" />
+    <ClCompile Include="source\main.cpp" />
+    <ClCompile Include="source\population.cpp" />
+    <ClCompile Include="source\selection\bestWinsTournament.cpp" />
+    <ClCompile Include="source\selection\fitnessProportionalSelection.cpp" />
+    <ClCompile Include="source\selection\probabilityTournament.cpp" />
+    <ClCompile Include="source\selection\singleElimination.cpp" />
+    <ClCompile Include="source\selection\tournamentSelection.cpp" />
+    <ClCompile Include="source\utility.cpp" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{3EE7C4A4-0ADA-4586-A97E-CEC32FA6852F}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
@@ -82,34 +110,6 @@
       <AdditionalDependencies>sfml-main.lib;sfml-graphics-s.lib;sfml-window-s.lib;sfml-system-s.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="algorithm.cpp" />
-    <ClCompile Include="bestWinsTournament.cpp" />
-    <ClCompile Include="bracket.cpp" />
-    <ClCompile Include="conformation.cpp" />
-    <ClCompile Include="element.cpp" />
-    <ClCompile Include="fitnessProportionalSelection.cpp" />
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="population.cpp" />
-    <ClCompile Include="probabilityTournament.cpp" />
-    <ClCompile Include="singleElimination.cpp" />
-    <ClCompile Include="tournamentSelection.cpp" />
-    <ClCompile Include="utility.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="algorithm.h" />
-    <ClInclude Include="bestWinsTournament.h" />
-    <ClInclude Include="bracket.h" />
-    <ClInclude Include="conformation.h" />
-    <ClInclude Include="element.h" />
-    <ClInclude Include="fitnessProportionalSelection.h" />
-    <ClInclude Include="population.h" />
-    <ClInclude Include="probabilityTournament.h" />
-    <ClInclude Include="selection.h" />
-    <ClInclude Include="singleElimination.h" />
-    <ClInclude Include="tournamentSelection.h" />
-    <ClInclude Include="utility.h" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

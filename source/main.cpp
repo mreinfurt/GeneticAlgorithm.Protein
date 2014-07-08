@@ -4,10 +4,10 @@
 #include <fstream>
 #include <iostream>
 #include "algorithm.h"
-#include "tournamentSelection.h"
-#include "bestWinsTournament.h"
-#include "probabilityTournament.h"
-#include "singleElimination.h"
+#include "selection/tournamentSelection.h"
+#include "selection/bestWinsTournament.h"
+#include "selection/probabilityTournament.h"
+#include "selection/singleElimination.h"
 #include <sstream>
 
 std::string SEQ20 = "10100110100101100101";
@@ -129,7 +129,7 @@ void testRates(Algorithm &algorithm);
 
  void testTournaments(Algorithm &algorithm)
  {
-	 std::ofstream logfile("tournamentTest.txt");
+	 std::ofstream logfile("logs/tournamentTest.txt");
 
 	 int tournamentSize = 2;
 	 int generations = 250;
@@ -162,7 +162,7 @@ void testRates(Algorithm &algorithm);
 	 float crossoverRate = 0.15f;
 
 	 std::ofstream logfile;
-	 logfile.open("testRates.txt");
+	 logfile.open("logs/testRates.txt");
 
 	 for (int m = 0; m <= 9; ++m)
 	 {

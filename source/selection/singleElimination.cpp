@@ -1,5 +1,5 @@
 #include "singleElimination.h"
-#include "bracket.h"
+#include "../bracket.h"
 #include <math.h>
 
 SingleElimination::SingleElimination(int size, int winRate) : m_TournamentSize(size), m_WinRate(winRate)

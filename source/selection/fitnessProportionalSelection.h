@@ -1,5 +1,5 @@
 #pragma once
-#include "selection.h"
+#include "../selection.h"
 class FitnessProportionalSelection :
 	public Selection
 {
