@@ -1,5 +1,11 @@
 #include "utility.h"
 
+/// <summary>
+/// Calculates the direction of the next element in regards to the current screen direction.
+/// </summary>
+/// <param name="currDir">The current screen direction.</param>
+/// <param name="elemDir">The direction of the element.</param>
+/// <returns></returns>
 ScreenDirection calculateDirection(ScreenDirection currDir, Direction elemDir)
 {
 	bool LE = (currDir == East && elemDir == Left);
@@ -35,10 +41,16 @@ ScreenDirection calculateDirection(ScreenDirection currDir, Direction elemDir)
 		return ScreenDirection::West;
 }
 
+/// <summary>
+/// Calculates the next cell by using the current cell and the screen direction of the element
+/// </summary>
+/// <param name="currentCell">The current cell.</param>
+/// <param name="direction">The direction.</param>
+/// <returns></returns>
 sf::Vector2i& calculateNextCell(sf::Vector2i &currentCell, ScreenDirection direction)
 {
 	sf::Vector2i &nextCell = currentCell;
-	switch (direction)
+	switch (direction) 
 	{
 	case North:
 		nextCell.y -= 1;
@@ -59,11 +71,24 @@ sf::Vector2i& calculateNextCell(sf::Vector2i &currentCell, ScreenDirection direc
 	return nextCell;
 }
 
+/// <summary>
+/// Determines whether or not the two elements are sequence neighbours.
+/// </summary>
+/// <param name="lhs">The first element.</param>
+/// <param name="rhs">The second element.</param>
+/// <returns></returns>
 bool isSequenceNeighbour(Element *lhs, Element *rhs)
 {
 	return (lhs->getIndex() == rhs->getIndex() - 1 || lhs->getIndex() == rhs->getIndex() + 1);
 }
 
+/// <summary>
+/// Returns the element on the position x/y in the given matrix
+/// </summary>
+/// <param name="x">The x.</param>
+/// <param name="y">The y.</param>
+/// <param name="matrix">The matrix.</param>
+/// <returns></returns>
 Element* getElement(int x, int y, std::vector<std::vector<Element*>> &matrix)
 {
 	return matrix[y][x];

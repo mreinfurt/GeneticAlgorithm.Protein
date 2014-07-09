@@ -3,7 +3,9 @@
 #include "element.h"
 #include "utility.h"
 
-// Holds all the directions
+/// <summary>
+/// A conformation is basically a vector of <see cref="Element"/>protein elements</see.
+/// </summary>
 class Conformation 
 {
 public:

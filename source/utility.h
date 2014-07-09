@@ -1,6 +1,9 @@
 #include "element.h"
 #pragma once
-// This file provides helper functions
+
+/// <summary>
+/// This file provides different helper functions.
+/// </summary>
 
 // Converts relative directions to screen directions
 ScreenDirection calculateDirection(ScreenDirection currDir, Direction elemDir);

@@ -25,6 +25,10 @@ std::string SEQ100_2 = "00000010110000011101111101100001100110111110111111111101
 void testTournaments(Algorithm &algorithm);
 void testRates(Algorithm &algorithm);
 
+/// <summary>
+/// Mains this instance.
+/// </summary>
+/// <returns></returns>
 int main()
 {
 	// Camera/View attributes

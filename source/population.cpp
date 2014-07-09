@@ -8,6 +8,14 @@ std::vector<std::vector<Element*>> createMatrix(Conformation &conformation);
 
 int overlaps = 0;
 
+/// <summary>
+/// Initializes a new instance of the <see cref=""/> .
+/// </summary>
+/// <param name="chain">The chain.</param>
+/// <param name="populationSize">Size of the population.</param>
+/// <param name="mutationRate">The mutation rate.</param>
+/// <param name="crossoverRate">The crossover rate.</param>
+/// <param name="selection">The selection.</param>
 Population::Population(std::string &chain, int populationSize, float mutationRate, float crossoverRate, Selection *selection) : 
 					   m_Chain(chain), 
 					   m_PopulationSize(populationSize), 
@@ -32,11 +40,17 @@ Population::Population(std::string &chain, int populationSize, float mutationRat
 	m_CrossoverRate = 1.0f;
 }
 
+/// <summary>
+/// Finalizes an instance of the <see cref=""/> class.
+/// </summary>
 Population::~Population()
 {
 	delete m_Selection;
 }
 
+/// <summary>
+/// Creates the initial population.
+/// </summary>
 void Population::createInitialPopulation()
 {
 	// Create 'n' random conformations
@@ -56,12 +70,18 @@ void Population::createInitialPopulation()
 	}
 }
 
+/// <summary>
+/// Executes the selection for the next generation by using the selection strategy that has been set up.
+/// </summary>
 void Population::selection()
 {	
 	m_Selection->select(m_Conformations);
 	m_Conformations[0] = *m_BestConformation;
 }
 
+/// <summary>
+/// Mutates as many elements as given through the m_MutationRate.
+/// </summary>
 void Population::mutation()
 {
 	// How many conformations to mutate?
@@ -75,6 +95,9 @@ void Population::mutation()
 	}
 }
 
+/// <summary>
+/// Selects conformations and crossovers them.
+/// </summary>
 void Population::crossover()
 {
 	// Random number to decide if we have to crossover
@@ -94,6 +117,10 @@ void Population::crossover()
 	}
 }
 
+/// <summary>
+/// Calculates the energy for each conformation.
+/// </summary>
+/// <returns></returns>
 float Population::evaluation()
 {
 	m_CumulativeEnergy = 0;
@@ -133,11 +160,21 @@ float Population::evaluation()
 	return m_CumulativeEnergy / (float)m_PopulationSize;
 }
 
+/// <summary>
+/// Returns the conformation with the highest energy value.
+/// </summary>
+/// <returns></returns>
 const Conformation& Population::getBestConformation() 
 {
 	return *m_BestConformation;
 }
 
+/// <summary>
+/// Calculates the energy of the given conformation
+/// </summary>
+/// <param name="elements">The elements.</param>
+/// <param name="matrix">The matrix.</param>
+/// <returns></returns>
 int calculateEnergy(std::vector<Element> &elements, std::vector<std::vector<Element*>> &matrix) 
 {
 	int energy = 0;
@@ -193,6 +230,11 @@ int calculateEnergy(std::vector<Element> &elements, std::vector<std::vector<Elem
 	return energy;	
 }
 
+/// <summary>
+/// Creates the matrix used for calculating the energy.
+/// </summary>
+/// <param name="conformation">The conformation.</param>
+/// <returns></returns>
 std::vector<std::vector<Element*>> createMatrix(Conformation &conformation)
 {
 	std::vector<Element> &elements = conformation.getElements();

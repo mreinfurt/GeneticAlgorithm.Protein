@@ -21,8 +21,9 @@ enum Direction {
 	Straight
 };
 
-/// Element
-/// Represents one element of the protein chain, identified by it's index
+/// <summary>
+/// Represents one element of the protein chain, identified by it's index.
+/// </summary>
 class Element {
 	public:
 		// Ctor

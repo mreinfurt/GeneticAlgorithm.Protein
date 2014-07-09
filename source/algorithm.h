@@ -5,6 +5,9 @@
 #include "population.h"
 #include <fstream>
 
+/// <summary>
+/// Implements a genetic algorithm
+/// </summary>
 class Algorithm {
 	public:
 		// Ctor / Dtor

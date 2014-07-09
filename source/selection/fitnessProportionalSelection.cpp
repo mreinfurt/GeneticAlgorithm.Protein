@@ -1,15 +1,26 @@
 #include "fitnessProportionalSelection.h"
 
 
+/// <summary>
+/// Initializes a new instance of the <see cref=""/> .
+/// </summary>
 FitnessProportionalSelection::FitnessProportionalSelection(void)
 {
 }
 
 
+/// <summary>
+/// Finalizes an instance of the <see cref=""/> class.
+/// </summary>
 FitnessProportionalSelection::~FitnessProportionalSelection(void)
 {
 }
 
+/// <summary>
+/// Selects a number of conformation from the given conformations vector.
+/// This is a fitness proportional selection, so that conformations with a higher energy value also have a higher chance of getting selected.
+/// </summary>
+/// <param name="conformations">The conformations.</param>
 void FitnessProportionalSelection::select(std::vector<Conformation> &conformations)
 {
 	std::vector<Conformation> old = conformations;

@@ -1,15 +1,30 @@
 #include "probabilityTournament.h"
 
+/// <summary>
+/// Initializes a new instance of the <see cref=""/> .
+/// </summary>
+/// <param name="size">The size.</param>
+/// <param name="winRate">The win rate.</param>
 ProbabilityTournament::ProbabilityTournament(int size, int winRate) : m_TournamentSize(size), m_WinRate(winRate)
 {
 
 }
 
+/// <summary>
+/// Finalizes an instance of the <see cref=""/> class.
+/// </summary>
+/// <returns></returns>
 ProbabilityTournament::~ProbabilityTournament(void)
 {
 
 }
 
+/// <summary>
+/// Compares two conformations and returns true if the energy of the first conformation is the lower one.
+/// </summary>
+/// <param name="i">The i.</param>
+/// <param name="j">The j.</param>
+/// <returns></returns>
 bool compare2Conformations(Conformation *i, Conformation *j) 
 { 
 	int energy1 = i->getEnergy();
@@ -18,6 +33,10 @@ bool compare2Conformations(Conformation *i, Conformation *j)
 	return energy1 < energy2; 
 }
 
+/// <summary>
+/// Selects a number of conformation from the given conformations vector.
+/// </summary>
+/// <param name="conformations">The conformations.</param>
 void ProbabilityTournament::select(std::vector<Conformation> &conformations)
 {
 	std::vector<Conformation> old = conformations;

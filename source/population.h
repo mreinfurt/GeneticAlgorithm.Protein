@@ -3,6 +3,10 @@
 #include "conformation.h"
 #include "selection.h"
 
+/// <summary>
+/// Represents one generation of the genetic algorithm. A population contains a certain number of conformations.
+/// It also has operations which can be executed on the population's inhabitants (conformations).
+/// </summary>
 class Population
 {
 public:

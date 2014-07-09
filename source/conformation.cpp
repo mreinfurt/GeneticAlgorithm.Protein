@@ -1,6 +1,10 @@
 #include "conformation.h"
 #include "element.h"
 
+/// <summary>
+/// Initializes a new instance of the <see cref=""/> .
+/// </summary>
+/// <param name="elements">The elements.</param>
 Conformation::Conformation(std::vector<Element> &elements) : m_Changed(true)
 {
 	// Copy all elements
@@ -10,6 +14,9 @@ Conformation::Conformation(std::vector<Element> &elements) : m_Changed(true)
 	}
 }
 
+/// <summary>
+/// Mutates this conformation.
+/// </summary>
 void Conformation::mutate()
 {
 	// Select a random element
@@ -31,6 +38,10 @@ void Conformation::mutate()
 	m_Changed = true;
 }
 
+/// <summary>
+/// Executes a crossover of this conformation with the given conformation
+/// </summary>
+/// <param name="conformation">The conformation.</param>
 void Conformation::crossover(Conformation &conformation)
 {
 	// Select a random start element

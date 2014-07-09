@@ -1,13 +1,26 @@
 #include "tournamentSelection.h"
 
+/// <summary>
+/// Initializes a new instance of the <see cref=""/> .
+/// </summary>
+/// <param name="size">The size.</param>
+/// <param name="winrate">The winrate.</param>
 TournamentSelection::TournamentSelection(int size, int winrate) : m_TournamentSize(size), m_WinRate(winrate)
 {
 }
 
+/// <summary>
+/// Finalizes an instance of the <see cref=""/> class.
+/// </summary>
 TournamentSelection::~TournamentSelection(void)
 {
 }
 
+/// <summary>
+/// Selects a number of conformation from the given conformations vector.
+/// This is done using basic tournament selection with the tournament size specified in the constructor
+/// </summary>
+/// <param name="conformations">The conformations.</param>
 void TournamentSelection::select(std::vector<Conformation> &conformations)
 {
 	std::vector<Conformation> old = conformations;

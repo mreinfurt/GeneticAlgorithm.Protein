@@ -4,8 +4,6 @@
 #include <utility>
 
 class Conformation;
-
-
 class Bracket {
 public:
     Bracket();

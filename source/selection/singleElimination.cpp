@@ -2,16 +2,29 @@
 #include "../bracket.h"
 #include <math.h>
 
+/// <summary>
+/// Initializes a new instance of the <see cref=""/> .
+/// </summary>
+/// <param name="size">The size.</param>
+/// <param name="winRate">The win rate.</param>
 SingleElimination::SingleElimination(int size, int winRate) : m_TournamentSize(size), m_WinRate(winRate)
 {
 
 }
 
+/// <summary>
+/// Finalizes an instance of the <see cref=""/> class.
+/// </summary>
 SingleElimination::~SingleElimination(void)
 {
 
 }
 
+/// <summary>
+/// Selects a number of conformation from the given conformations vector.
+/// This is done using by using the single elimination method.
+/// </summary>
+/// <param name="conformations">The conformations.</param>
 void SingleElimination::select(std::vector<Conformation> &conformations)
 {
 	// k only 2,4,8,16,32,64 ...

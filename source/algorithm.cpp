@@ -14,6 +14,9 @@ Algorithm::~Algorithm()
 	delete m_DrawConformation;
 }
 
+/// <summary>
+/// Completely draws the conformation in m_DrawConformation
+/// </summary>
 void Algorithm::draw()
 {
 	int offset = Element::Offset;
@@ -74,6 +77,11 @@ void Algorithm::draw()
 }
 
 
+/// <summary>
+/// Starts the genetic algorithm, it will run for m_MaxGeneration generations.
+/// This function will block the thread and drawing!
+/// </summary>
+/// <param name="output">if set to <c>true</c> [output].</param>
 void Algorithm::run(bool output)
 {
 	float avgFitness = m_Population->evaluation();
@@ -105,6 +113,10 @@ void Algorithm::run(bool output)
 	m_Logfile.close();
 }
 
+/// <summary>
+/// Updates the algorithm my "calculating" one generation.
+/// It will return after one generation and thus can be used when the algorithm should be visualized.
+/// </summary>
 void Algorithm::update()
 {
 	if (m_Generation < m_MaxGeneration)
@@ -133,6 +145,16 @@ void Algorithm::update()
 	}
 }
 
+/// <summary>
+/// Initializes or resets the algorithm.
+/// </summary>
+/// <param name="maxGeneration">The maximum generation.</param>
+/// <param name="populationSize">Size of the population.</param>
+/// <param name="chain">The chain.</param>
+/// <param name="mutationRate">The mutation rate.</param>
+/// <param name="crossoverRate">The crossover rate.</param>
+/// <param name="selection">The selection.</param>
+/// <param name="file">The file.</param>
 void Algorithm::setUp(int maxGeneration, int populationSize, std::string &chain, float mutationRate, float crossoverRate, Selection *selection, std::string &file)
 {
 	m_Energy = 0;

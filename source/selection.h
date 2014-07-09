@@ -3,7 +3,9 @@
 #include <vector>
 #include "conformation.h"
 
-// Interface for selection strategies
+/// <summary>
+/// Interface for different selection strategies
+/// </summary>
 class Selection
 {
 public:
