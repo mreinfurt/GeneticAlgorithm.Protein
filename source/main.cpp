@@ -37,7 +37,7 @@ int main()
 	float scaleSpeed = 0.05f;
 
 	sf::RenderWindow window(sf::VideoMode(1024, 600), "Genetic algorithms - Norman Ackermann, Manuel Reinfurt");
-	sf::View view(sf::FloatRect(0, 0, window.getSize().x, window.getSize().y));
+	sf::View view(sf::FloatRect(0.0f, 0.0f, (float) window.getSize().x, (float) window.getSize().y));
 	window.setVerticalSyncEnabled(false);
 
 	Algorithm algorithm(window);
@@ -54,7 +54,7 @@ int main()
 
 	//		testTournaments(algorithm);
 
-	algorithm.setUp(1, 5, SEQ48, 0.08f, 0.30f, new TournamentSelection(2.0f, 0.8f));
+	algorithm.setUp(1, 5, SEQ48, 0.08f, 0.30f, new TournamentSelection(2, 0.8f));
 	algorithm.run(true);
 
 	while (window.isOpen())
@@ -70,7 +70,7 @@ int main()
 			{
 				if (event.key.code == sf::Keyboard::Return)
 				{
-					algorithm.setUp(250, 5000, SEQ20, 0.08, 0.30f, new TournamentSelection(2.0, 80.0f));
+					algorithm.setUp(250, 5000, SEQ20, 0.08f, 0.30f, new TournamentSelection(2, 80.0f));
 				}
 
 				if (event.key.code == sf::Keyboard::Space)

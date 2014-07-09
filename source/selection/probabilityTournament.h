@@ -3,7 +3,7 @@
 class ProbabilityTournament : public Selection
 {
 public:
-	ProbabilityTournament(int size, int winRate);
+	ProbabilityTournament(int size, float winRate);
 	virtual ~ProbabilityTournament(void);
 
 	virtual void select(std::vector<Conformation> &conformations);

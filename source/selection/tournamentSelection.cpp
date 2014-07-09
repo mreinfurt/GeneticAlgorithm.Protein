@@ -5,7 +5,7 @@
 /// </summary>
 /// <param name="size">The size.</param>
 /// <param name="winrate">The winrate.</param>
-TournamentSelection::TournamentSelection(int size, int winrate) : m_TournamentSize(size), m_WinRate(winrate)
+TournamentSelection::TournamentSelection(int size, float winrate) : m_TournamentSize(size), m_WinRate(winrate)
 {
 }
 

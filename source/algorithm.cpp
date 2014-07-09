@@ -6,7 +6,7 @@
 
 Algorithm::Algorithm(sf::RenderWindow &window) : m_RenderWindow(window), m_DrawConformation(NULL), m_Energy(0), m_Population(NULL)
 {
-	srand(time(NULL));
+	srand(static_cast<unsigned int>(time(NULL)));
 }
 
 Algorithm::~Algorithm()
@@ -122,6 +122,7 @@ void Algorithm::update()
 	if (m_Generation < m_MaxGeneration)
 	{
 		m_Generation++;
+		
 		m_Population->selection();
 		m_Population->crossover();
 		m_Population->mutation();

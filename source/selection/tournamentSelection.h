@@ -4,13 +4,13 @@
 class TournamentSelection : public Selection
 {
 public:
-	TournamentSelection(int size, int winrate);
+	TournamentSelection(int size, float winrate);
 	virtual ~TournamentSelection(void);
 
 	virtual void select(std::vector<Conformation> &conformations);
 
 private:
 	int m_TournamentSize;
-	int m_WinRate;
+	float m_WinRate;
 };
 

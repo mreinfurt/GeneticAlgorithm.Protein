@@ -3,7 +3,7 @@
 class SingleElimination : public Selection
 {
 public:
-	SingleElimination(int size, int winRate);
+	SingleElimination(int size, float winRate);
 	virtual ~SingleElimination(void);
 
 	virtual void select(std::vector<Conformation> &conformations);

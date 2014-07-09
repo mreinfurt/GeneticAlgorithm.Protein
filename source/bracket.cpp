@@ -32,7 +32,7 @@ void Bracket::setAttendees(Conformation &attendee1, Conformation &attendee2)
 /// Lets the two attendees fight. 
 /// </summary>
 /// <param name="winrate">The winrate of the attendee with the higher energy value.</param>
-void Bracket::fight(int winrate)
+void Bracket::fight(float winrate)
 {
 	if ( m_Attendee1.first->getEnergy() > m_Attendee2.first->getEnergy() )
     {

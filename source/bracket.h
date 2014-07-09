@@ -9,7 +9,7 @@ public:
     Bracket();
     ~Bracket();
     void setAttendees(Conformation &attendee1, Conformation &attendee2);
-    void fight(int winrate);
+    void fight(float winrate);
     Conformation& getWinner(void);
     Conformation& getLoser(void);
     

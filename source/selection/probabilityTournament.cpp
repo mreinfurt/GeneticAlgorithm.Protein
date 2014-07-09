@@ -5,7 +5,7 @@
 /// </summary>
 /// <param name="size">The size.</param>
 /// <param name="winRate">The win rate.</param>
-ProbabilityTournament::ProbabilityTournament(int size, int winRate) : m_TournamentSize(size), m_WinRate(winRate)
+ProbabilityTournament::ProbabilityTournament(int size, float winRate) : m_TournamentSize(size), m_WinRate(winRate)
 {
 
 }
@@ -61,7 +61,7 @@ void ProbabilityTournament::select(std::vector<Conformation> &conformations)
 		{			
 			int random = rand() % 10000;
 			float winRate = m_WinRate * pow((1 - m_WinRate), counter);
-			float realRandom = random / 100;
+			float realRandom = random / 100.0f;
 			
 			if (realRandom < winRate)
 			{

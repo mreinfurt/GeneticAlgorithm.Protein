@@ -29,7 +29,7 @@ Population::Population(std::string &chain, int populationSize, float mutationRat
 
 	for (unsigned int i = 0; i < chain.length(); ++i)	
 	{
-		bool hydrophobe = (bool) (chain.at(i) - ASCII_Offset);
+		bool hydrophobe = static_cast<bool> (chain.at(i) - ASCII_Offset);
 		Element element(!hydrophobe, i);
 		m_Elements.push_back(element);
 	}
