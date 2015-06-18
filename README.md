@@ -19,4 +19,5 @@ The following selection methods are supported:
 - Probability-based tournament
 - Single Elimination tournament
 - "Best wins" tournament
-The tournament size can be specified.
+
+Tournament sizes (number of conformations) can be specified.
