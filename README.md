@@ -1,7 +1,7 @@
 GA
 ==
 
-Genetic algorithm developed for the 2D-HP protein folding model. The application creates an initial population of conformaions (a protein folding) and then applies selection, mutation and crossover.
+Genetic algorithm developed for the 2D-HP protein folding model. The application creates an initial population of conformations (a protein folding) and then applies selection, mutation and crossover.
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/mreinfurt/GeneticAlgorithm/master/information/preview.png">
