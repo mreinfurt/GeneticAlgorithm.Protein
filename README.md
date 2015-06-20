@@ -31,7 +31,7 @@ The algorithm automatically logs a runthrough to the ```average.txt``` file whic
 Additionally, the functions ```testTournaments``` and ```testRates``` are available, both of which use a set of parameters, do one runthrough of the algorithm. Then they change the parameters by a little bit and do another runthrough. This can be done for as many runthroughs as wanted. This way it's easy to analyze how the parameters affect the results.
 
 ## Example
-The easiest way to adjust the algorithm is by playing around with the parameters from the Algorithm::setUp method:
+The easiest way to adjust the algorithm is by playing around with the parameters from the ```Algorithm::setUp``` method:
 ```setUp(int maxGeneration, int populationSize, std::string &chain, float mutationRate, float crossoverRate, Selection *selection, std::string& file = (std::string)"average.txt");```
 
 - *maxGeneration:* How many generations to iterate through
