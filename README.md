@@ -1,4 +1,4 @@
-GA
+Genetic Algorithm (2D-HP Protein Folding)
 ==
 
 Genetic algorithm developed for the 2D-HP protein folding model. The application creates an initial population of conformations (a protein folding) and then applies selection, mutation and crossover.
