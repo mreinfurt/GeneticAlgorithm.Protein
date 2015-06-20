@@ -23,7 +23,7 @@ The following selection methods are supported:
 Tournament sizes (number of conformations) can be specified.
 
 ## Logging
-The algorithm automatically logs a runthrough to the ```average.txt``` file which contains the average energy of one population for each generation. This can be used to generate graphs like this:
+The algorithm automatically logs a runthrough to the ```average.txt``` file which contains the average energy of one population for each generation. This can be used to generate graphs like this (average energy vertical, generation number horizontal):
 <p align="center">
   <img src="https://raw.githubusercontent.com/mreinfurt/GeneticAlgorithm/master/information/seq50.png">
 </p>
