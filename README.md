@@ -7,6 +7,9 @@ Genetic algorithm developed for the 2D-HP protein folding model. The application
   <img src="https://raw.githubusercontent.com/mreinfurt/GeneticAlgorithm/master/information/preview.png">
 </p>
 
+# Installation
+The repository contains a Visual Studio 2013 project which includes all dependencies and can be run straight away. 
+
 # General concept
 - A conformation contains elements
 - An element is either hydrophile or not
